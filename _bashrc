@@ -247,8 +247,8 @@ ${ERRPROMPT}${TERGREEN}"
     # switch to export history to all terminals
     export HISTSIZE=100000                   # big big history
     export HISTFILESIZE=100000               # big big history
+
     exp_history="no"
-    https://stackoverflow.com/questions/14750650/how-to-delete-history-of-last-10-commands-in-shell
     if [ "$exp_history" = "yes" ]; then
     PROMPT_COMMAND="prompt_command; history -a; history -c; history -r"
     else
