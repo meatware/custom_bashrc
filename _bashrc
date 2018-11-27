@@ -13,7 +13,7 @@ fi
 # Source bashrc assets
 . $HOME/bashrc_assets/_bash_colour_functions
 . $HOME/bashrc_assets/_bash_helper_functions
-###. $HOME/bashrc_assets/_bash_colour_defs
+###. HOME/bashrc_assets/_bash_colour_defs
 . $HOME/bashrc_assets/_bash_git_functions
 . $HOME/bashrc_assets/_bash_aliases
 
@@ -218,9 +218,9 @@ function prompt_command() {
     ###################################################
     ### set color coded error string for prompt depending on success of last command
     if [[ $last_status == "0" ]]; then
-            ERRPROMPT="\[\033[1;5;32m\]${ENDBIT} "
+        ERRPROMPT="\[\033[1;5;32m\]${ENDBIT} "
     else
-            ERRPROMPT='\[\033[1;5;31m\]X '
+        ERRPROMPT='\[\033[1;5;31m\]X '
     fi
 
     ###################################################
@@ -229,22 +229,22 @@ function prompt_command() {
 
 
 
-
-    PS1="${debian_chroot:+($debian_chroot)}\n\
-    ${YELLOW}${BARCOL}┌──\
-    ${TXTCOL}[\u]\
-    ${BARCOL}──\
-    ${TXTCOL}[\H]\
-    ${BARCOL}──\
-    ${TXTCOL}[speed: ${timer_show}s]\
-    $(parse_git)\
-    ${VIRTENV}
-    ${BARCOL}│${DKGRAY}${TTY_VAR}${WHITE}> \w \
-    \n${BARCOL}└──\
-    ${TXTCOL}`date +"%H:%M"`\
-    ${BARCOL}──\
-    ${ERRPROMPT}${TERGREEN}"
-    }
+## move out of tabs to avoid formatting horror
+PS1="${debian_chroot:+($debian_chroot)}\n\
+${YELLOW}${BARCOL}┌──\
+${TXTCOL}[\u]\
+${BARCOL}──\
+${TXTCOL}[\H]\
+${BARCOL}──\
+${TXTCOL}[speed: ${timer_show}s]\
+$(parse_git)\
+${VIRTENV}
+${BARCOL}│${DKGRAY}${TTY_VAR}${WHITE}> \w \
+\n${BARCOL}└──\
+${TXTCOL}`date +"%H:%M"`\
+${BARCOL}──\
+${ERRPROMPT}${TERGREEN}"
+}
 
     # switch to export history to all terminals
     export HISTSIZE=100000                   # big big history
