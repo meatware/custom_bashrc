@@ -1,3 +1,4 @@
+# not used so far
 MORANGE="\[\033[38;1;202m\]"
 DORANGE="\[\033[38;1;221m\]"
 YELLOW="\[\033[01;38;1;221m\]"
