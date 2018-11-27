@@ -1,0 +1,20 @@
+function colsw(){
+        ## switches theme color set by $THEME_VAR vals range from - 0 to 9
+        cp ~/.bashrc ~/.bashrc_OG ### create failsafebackup first
+        local CURRCOL=`grep "THEME_VAR=" ~/.bashrc | grep -v sed | tr '=' ' ' | awk '{print $2}'`
+        cat ~/.bashrc | sed "s/THEME_VAR=${CURRCOL}/THEME_VAR=${1}/" > ~/.bashrc_temp && cp ~/.bashrc_temp ~/.bashrc
+        source ~/.bashrc
+}
+
+function cproot(){
+        ## copies .bashrc to root
+        sudo cp ~/.bashrc /root/
+        #source ~/.bashrc
+}
+
+function cpcol(){
+        ## copies .bashrc to remote host specified by $1 commandline arg
+        rsync -av ~/.bashrc ${1}:~/
+}
+
+
