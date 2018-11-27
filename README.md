@@ -10,7 +10,8 @@
 ### Installation
 
 ```
-git clone https://github.com/meatware/custom_bashrc.git ~/
+cd
+git clone https://github.com/meatware/custom_bashrc.git
 cp ~/custom_bashrc/_bashrc ~/.bashrc
 ```
 
