@@ -12,6 +12,7 @@
 ```
 cd
 git clone https://github.com/meatware/custom_bashrc.git
-cp ~/custom_bashrc/_bashrc ~/.bashrc
+rm .bashrc; ln -s ~/custom_bashrc/_bashrc ~/.bashrc
+# add git checkout hostmname here
 ```
 
