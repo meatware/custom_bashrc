@@ -6,15 +6,13 @@ function colsw(){
         source ~/.bashrc
 }
 
-function cproot(){
+function col_cp_root(){
         ## copies .bashrc to root
         sudo cp ~/.bashrc /root/
         #source ~/.bashrc
 }
 
-function cpcol(){
+function col_ssh(){
         ## copies .bashrc to remote host specified by $1 commandline arg
         rsync -av ~/.bashrc ${1}:~/
 }
-
-

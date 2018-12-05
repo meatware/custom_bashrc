@@ -37,7 +37,8 @@ function ghf {
     `grepped-history "$1" | unique-history | grep ^$2 | chop-first-column`;
   fi
 }
-##################################
+
+################################################
 # https://stackoverflow.com/questions/14750650/how-to-delete-history-of-last-10-commands-in-shell
 histdeln(){
   # deletes the last n lines of history including del history command
@@ -55,3 +56,17 @@ histdel(){
   done
   history -d $(history 1 | awk '{print $1}')
 }
+
+################################################
+grepo() {
+    # finds all files in current directory recursively and searches each for grep pattern
+    # (case insensitive)
+    find . -name "*" -exec grep -si $1 {}  \;
+}
+
+grepoall() {
+    # finds all files in current directory recursively and searches each for grep pattern
+    # Shows the file name in which the pattern was found (case insensitive + linenumber)
+    find . -name "*" -exec grep -sin $1 {} /dev/null \;
+}
+
