@@ -15,9 +15,9 @@ cd
 git clone https://github.com/meatware/custom_bashrc.git
 mv .bashrc .your_old_bashrc; ln -s ~/custom_bashrc/_bashrc ~/.bashrc
 ```
-#### Optional
+
+#### Optional: Quick-create git branch make changes in ~
 ```
-# Quick-create git branch hostname here to directly edit in ~
 cd ~/custom_bashrc
 MYHOST="$(hostname)"
 MYNAME="$(whoami)"
