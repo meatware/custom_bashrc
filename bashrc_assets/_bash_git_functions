@@ -1,3 +1,5 @@
+https://github.com/arialdomartini/oh-my-git
+
 function parse_git() {
 
     ### first check to see if we are in a git branch
