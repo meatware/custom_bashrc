@@ -1,6 +1,5 @@
 # .bashrc
 
-
 #if [ -f ~/.bashrc ]; then
 #   . ~/.bashrc
 #fi
@@ -102,39 +101,9 @@ HISTSIZE=5000
 HISTFILESIZE=10000
 shopt -s histappend
 
-color_prompt=no
-if [ "$color_prompt" = no ]; then
-# https://www.askapache.com/linux/bash-power-prompt/
-#    echo "no color"
-#    #PROMPT_COMMAND="FUNCpromptCommand"
-#    function prompt_command() {
-#        PS1="[\d \t \u@\h:\w ] $ "
-#    }
+color_prompt=yes
+if [ "$color_prompt" = yes ]; then
 
-function prompt_command ()
-{
-   local colors=`tput colors 2>/dev/null||echo -n 1` C=;
-
-   if [[ $colors -ge 256 ]]; then
-      C="`tput setaf 33 2>/dev/null`";
-      AA_P='mf=x mt=x n=0; while [[ $n < 1 ]];do read a mt a; read a mf a; (( n++ )); done</proc/meminfo; export AA_PP="\033[38;5;2m"$((mf/1024))/"\033[38;5;89m"$((mt/1024))MB; unset -v mf mt n a';
-   else
-      C="`tput setaf 4 2>/dev/null`";
-      AA_P='mf=x mt=x n=0; while [[ $n < 1 ]];do read a mt a; read a mf a; (( n++ )); done</proc/meminfo; export AA_PP="\033[92m"$((mf/1024))/"\033[32m"$((mt/1024))MB; unset -v mf mt n a';
-   fi;
-
-   eval $AA_P;
-
-   PROMPT_COMMAND='stty echo; history -a; echo -en "\e[34h\e[?25h"; (($SECONDS % 2==0 )) && eval $AA_P; echo -en "$AA_PP";';
-   SSH_TTY=${SSH_TTY:-`tty 2>/dev/null||readlink /proc/$$/fd/0 2>/dev/null`}
-
-   PS1="\[\e[m\n\e[1;30m\][\$\$:\$PPID \j:\!\[\e[1;30m\]]\[\e[0;36m\] \T \d \[\e[1;30m\][${C}\u@\H\[\e[1;30m\]:\[\e[0;37m\]${SSH_TTY/\/dev\/} \[\e[0;32m\]+${SHLVL}\[\e[1;30m\]] \[\e[1;37m\]\w\[\e[0;37m\]\n\\$ ";
-
-   export PS1 AA_P PROMPT_COMMAND SSH_TTY
-}
-
-else
-    echo "color"
     function prompt_command() {
         ###################################################
         ### identify success/fail status of last command
@@ -271,23 +240,27 @@ ${BARCOL}│${DKGRAY}${TTY_VAR}${WHITE}> \w \
 ${TXTCOL}`date +"%H:%M"`\
 ${BARCOL}──\
 ${ERRPROMPT}${TERGREEN}"
-    # end of function prompt_command()
-    }
-fi # if/else on color_prompt=yes/no
+}
 
-# option to switch to export history to all terminals
+
+else
+    prompt_command() {
+        PS1="[\d \t \u@\h:\w ] $ "
+    }
+    
+fi
+
+# switch to export history to all terminals & EXPORT PROMPT
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
-
 exp_history="no"
 if [ "$exp_history" = "yes" ]; then
     PROMPT_COMMAND="prompt_command; history -a; history -c; history -r"
 else
-#trap 'timer_start' DEBUG
-#timer_stop;
+    #trap 'timer_start' DEBUG
+    #timer_stop;
     PROMPT_COMMAND="prompt_command"
 fi
-
 
 
 #################################################################
