@@ -1,6 +1,10 @@
-# not used so far
-MORANGE="\[\033[38;1;202m\]"
-DORANGE="\[\033[38;1;221m\]"
+# colors:
+# http://bitmote.com/index.php?post/2012/11/19/Using-ANSI-Color-Codes-to-Colorize-Your-Bash-Prompt-on-Linux
+# http://blog.taylormcgann.com/tag/prompt-color/
+
+# more: https://github.com/prgmrcom/ansible-bash-color-prompt/blob/master/templates/colorprompt.sh.j2
+MORANGE="\[\033[38;5;202m\]"
+DORANGE="\[\033[38;5;221m\]"
 YELLOW="\[\033[01;38;1;221m\]"
 TEAL="\[\033[0;1;36m\]"
 BCYAN="\[\033[1;1;36m\]"
@@ -29,4 +33,4 @@ HIBlue="\[\033[0;94m\]"
 HIPurple="\[\033[0;95m\]"
 HICyan="\[\033[0;96m\]"
 HIWhite="\[\033[0;97m\]"
-hop="hahahahahahh"
+

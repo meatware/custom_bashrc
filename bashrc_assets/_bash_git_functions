@@ -1,3 +1,10 @@
+##################################
+### git branch functions
+# check https://github.com/magicmonty/bash-git-prompt
+# http://stackoverflow.com/questions/2657935/checking-for-a-dirty-index-or-untracked-files-with-git
+# https://github.com/jimeh/git-aware-prompt/blob/master/prompt.sh
+
+
 https://github.com/arialdomartini/oh-my-git
 
 function parse_git() {
