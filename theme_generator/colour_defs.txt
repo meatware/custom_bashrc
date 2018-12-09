@@ -1,0 +1,30 @@
+MORANGE="\[\033[38;5;202m\]"  # MORANGE
+DORANGE="\[\033[38;5;221m\]" # DORANGE
+YELLOW="\[\033[01;38;1;221m\]" # YELLOW
+TEAL="\[\033[0;1;36m\]" # TEAL
+BCYAN="\[\033[1;1;36m\]" # BCYAN
+LBLUE="\[\033[0;1;34m\]" # LBLUE
+VBLUE="\[\033[0;1;34m\]" # VBLUE
+VLBLUE="\[\033[1;1;34m\]" # VLBLUE
+GRAY="\[\033[0;37m\]" # GRAY
+DKGRAY="\[\033[1;30m\]" # DKGRAY
+WHITE="\[\033[1;37m\]" # WHITE
+TERGREEN="\[\033[00m\]" # TERGREEN
+RED="\[\033[1;1;31m\]" # RED
+CHATREU="\[\033[1;1;32m\]" # CHATREU
+LGREEN="\[\033[1;2;32m\]" # LGREEN
+SLATE="\[\033[1;2;37m\]" # SLATE
+LYELLOW="\[\033[1;33m\]" # LYELLOW
+LMAGENTA="\[\033[1;35m\]" # LMAGENTA
+MAGENTA="\[\033[1;1;35m\]" # MAGENTA
+
+####
+# High Intensty #
+HIBlack="\[\033[0;90m\]" # HIBlack
+HIRed="\[\033[0;1;91m\]" # HIRed
+HIGreen="\[\033[0;92m\]" # HIGreen
+HIYellow="\[\033[0;1;93m\]" # HIYellow
+HIBlue="\[\033[0;94m\]" # HIBlue
+HIPurple="\[\033[0;95m\]" # HIPurple
+HICyan="\[\033[0;96m\]" # HICyan
+HIWhite="\[\033[0;97m\]" # HIWhite

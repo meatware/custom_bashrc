@@ -97,7 +97,7 @@ if [ "$color_prompt" = yes ]; then
         ### Setup if else for different color themes
 
 
-        THEME_VAR=0
+        THEME_VAR=9
 
         # lookup array from _bash_colour_defs
         BARCOL=${BARCOL_ARR[${THEME_VAR}]}
