@@ -24,7 +24,7 @@ function colsw(){
     local CURRCOL=`grep "THEME_VAR=" ~/.bashrc | grep -v sed | tr '=' ' ' | awk '{print $2}'`
     cat ~/.bashrc | sed "s/THEME_VAR=${CURRCOL}/THEME_VAR=${NEWCOL}/" > ~/.bashrc_temp && cp ~/.bashrc_temp ~/.bashrc
 
-    ## Debugging switch for when using theme_generator.py
+    ### Debugging switch for when using theme_generator.py
     PRINTCOLVAR="ON"
     if [ $PRINTCOLVAR = "ON" ]; then
         BARCOL_NAME=${BARCOL_ARR[${THEME_VAR}]}

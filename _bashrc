@@ -96,8 +96,12 @@ if [ "$color_prompt" = yes ]; then
         ###################################################
         ### Setup if else for different color themes
 
+        ### set theme var
+        THEME_VAR=1
 
-        THEME_VAR=9
+        ### Set Path col variable
+        PATH_COL_VAR=0
+        PATH_COL=${PATH_COLS_ARR[${PATH_COL_VAR}]}
 
         # lookup array from _bash_colour_defs
         BARCOL=${BARCOL_ARR[${THEME_VAR}]}
@@ -146,7 +150,7 @@ ${BARCOL}──\
 ${TXTCOL}[speed: ${timer_show}s]\
 $(parse_git)\
 ${VIRTENV}
-${BARCOL}│${DKGRAY}${TTY_VAR}${WHITE}> \w \
+${BARCOL}│${DKGRAY}${TTY_VAR}${PATH_COL}> \w \
 \n${BARCOL}└──\
 ${TXTCOL}`date +"%H:%M"`\
 ${BARCOL}──\

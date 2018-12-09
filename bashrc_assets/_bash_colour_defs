@@ -11,8 +11,8 @@
 # LBLUE="\[\033[0;1;34m\]"
 # VBLUE="\[\033[0;1;34m\]"
 # VLBLUE="\[\033[1;1;34m\]"
-# GRAY="\[\033[0;37m\]"
-# DKGRAY="\[\033[1;30m\]"
+GRAY="\[\033[0;37m\]"
+DKGRAY="\[\033[1;30m\]"
 # WHITE="\[\033[1;37m\]"
 # TERGREEN="\[\033[00m\]"
 # RED="\[\033[1;1;31m\]"
@@ -106,6 +106,7 @@ On_ICyan='\[\e[0;106m\]'    # Cyan
 On_IWhite='\[\e[0;107m\]'   # White
 #############
 
+PATH_COLS_ARR=("${WHITE}" "${GRAY}" "${DKGRAY}" "${UGreen}")
 
 
 # BARCOL_ARR=("${SLATE}" "${BCYAN}" "${DORANGE}" "${LBLUE}"  "${LBLUE}" "${LGREEN}" "${VBLUE}" "${HIRed}" "${HIPurple}" "${TERGREEN}")
