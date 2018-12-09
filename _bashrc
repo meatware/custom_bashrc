@@ -53,12 +53,12 @@ function virtualenv_info(){
 ##################################
 ### last command timer
 function timer_start {
-  timer=${timer:-$SECONDS}
+    timer=${timer:-$SECONDS}
 }
 
 function timer_stop {
-  timer_show=$(($SECONDS - $timer))
-  unset timer
+    timer_show=$(($SECONDS - $timer))
+    unset timer
 }
 
 #trap 'timer_start' DEBUG
@@ -95,50 +95,16 @@ if [ "$color_prompt" = yes ]; then
 
         ###################################################
         ### Setup if else for different color themes
-        # Turn the prompt symbol red if the user is root
+
 
         THEME_VAR=0
-        if [[ THEME_VAR -eq 0 ]]; then
-            #BARCOL="${LBLUE}"
-            #TXTCOL="${TEAL}"
-            BARCOL="${DORANGE}"
-            TXTCOL="${MORANGE}"
-        elif [[ THEME_VAR -eq 1 ]]; then
-            BARCOL="${LBLUE}"
-            TXTCOL="${TEAL}"
-        elif [[ THEME_VAR -eq 2 ]]; then
-            BARCOL="${BCYAN}"
-            TXTCOL="${SLATE}"
-        elif [[ THEME_VAR -eq 3 ]]; then
-            BARCOL="${SLATE}"
-            TXTCOL="${CHATREU}"
-        elif [[ THEME_VAR -eq 4 ]]; then
-            BARCOL="${LBLUE}"
-            TXTCOL="${LMAGENTA}"
-        elif [[ THEME_VAR -eq 5 ]]; then
-            BARCOL="${LGREEN}"
-            TXTCOL="${CHATREU}"
-        elif [[ THEME_VAR -eq 6 ]]; then
-            BARCOL="${VBLUE}"
-            TXTCOL="${VLBLUE}"
-        elif [[ THEME_VAR -eq 7 ]]; then
-            BARCOL="${HIRed}"
-            TXTCOL="${HIYellow}"
-        elif [[ THEME_VAR -eq 8 ]]; then
-            BARCOL="${HIPurple}"
-            TXTCOL="${HIBlue}"
-        elif [[ THEME_VAR -eq 9 ]]; then
-            BARCOL="${TERGREEN}"
-            TXTCOL="${HICyan}"
-        else
-            BARCOL="${DORANGE}"
-            TXTCOL="${MORANGE}"
-            echo -e '\n\nbash color prompt idx not recognised!!\n Default theme will be set...\n\n\n'
-            ### switch to default local color
-            colsw 0 # switch back to 0
-        fi
+
+        # lookup array from _bash_colour_defs
+        BARCOL=${BARCOL_ARR[${THEME_VAR}]}
+        TXTCOL=${TXTCOL_ARR[${THEME_VAR}]}
 
         ###################################################
+        ### Turn the prompt symbol red if the user is root
         ### root stuff
         if [[ $(id -u) -eq 0 ]]; then
             ### root color

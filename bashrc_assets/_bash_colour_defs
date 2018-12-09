@@ -34,3 +34,8 @@ HIPurple="\[\033[0;95m\]"
 HICyan="\[\033[0;96m\]"
 HIWhite="\[\033[0;97m\]"
 
+BARCOL_ARR=("${SLATE}" "${BCYAN}" "${DORANGE}" "${LBLUE}"  "${LBLUE}" "${LGREEN}" "${VBLUE}" "${HIRed}" "${HIPurple}" "${TERGREEN}")
+TXTCOL_ARR=("${CHATREU}" "${SLATE}" "${MORANGE}" "${TEAL}" "${LMAGENTA}" "${CHATREU}" "${VLBLUE}" "${HIYellow}" "${HIBlue}" "${HICyan}")
+
+BARCOL_ARR_LEN=${#BARCOL_ARR[@]}
+#TXTCOL_ARR_LEN=${#TXTCOL_ARR[@]}
