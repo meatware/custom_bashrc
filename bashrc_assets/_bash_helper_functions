@@ -44,11 +44,11 @@ function top_ten { sort | uniq -c | sort -r | head -n 10 ; }
 function unique_history { chop_first_column | top_ten | chop_first_column | add_line_numbers ; }
 
 function ghf {
-  if [ $# -eq 0 ]; then latest_history | unique_history; fi
-  if [ $# -eq 1 ]; then grepped_history "$1" | unique_history; fi
-  if [ $# -eq 2 ]; then
-    `grepped_history "$1" | unique_history | grep ^$2 | chop_first_column`;
-  fi
+    if [ $# -eq 0 ]; then latest_history | unique_history; fi
+    if [ $# -eq 1 ]; then grepped_history "$1" | unique_history; fi
+    if [ $# -eq 2 ]; then
+        $(grepped_history "$1" | unique_history | grep ^$2 | chop_first_column)
+    fi
 }
 
 ################################################
@@ -64,10 +64,10 @@ histdeln(){
 }
 
 histdel(){
-  for h in $(seq $1 $2 | tac); do
-    history -d $h
-  done
-  history -d $(history 1 | awk '{print $1}')
+    for h in $(seq $1 $2 | tac); do
+        history -d $h
+    done
+    history -d $(history 1 | awk '{print $1}')
 }
 
 ################################################

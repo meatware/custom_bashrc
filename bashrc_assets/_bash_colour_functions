@@ -21,7 +21,7 @@ function colsw(){
     fi
 
     cp ~/.bashrc ~/.bashrc_OG ### create failsafebackup first
-    local CURRCOL=`grep "THEME_VAR=" ~/.bashrc | grep -v sed | tr '=' ' ' | awk '{print $2}'`
+    local CURRCOL=$(grep "THEME_VAR=" ~/.bashrc | grep -v sed | tr '=' ' ' | awk '{print $2}')
     cat ~/.bashrc | sed "s/THEME_VAR=${CURRCOL}/THEME_VAR=${NEWCOL}/" > ~/.bashrc_temp && cp ~/.bashrc_temp ~/.bashrc
 
     ### Debugging switch for when using theme_generator.py
