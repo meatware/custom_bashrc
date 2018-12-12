@@ -34,22 +34,6 @@ fi
 # https://www.maketecheasier.com/more-useful-and-interesting-bash-prompts/ # megafancyprompt
 
 
-
-
-#############################
-function virtualenv_info(){
-    # Get Virtual Env
-    if [[ -n "$VIRTUAL_ENV" ]]; then
-        # Strip out the path and just leave the env name
-        venv="${VIRTUAL_ENV##*/}"
-    else
-        # In case you don't have one activated
-        venv=''
-    fi
-    [[ -n "$venv" ]] && echo "${BARCOL}──${TXTCOL}[${HIRed}venv: $venv${TXTCOL}]"
-}
-
-
 ##################################
 ### last command timer
 function timer_start {
@@ -63,11 +47,7 @@ function timer_stop {
 
 #trap 'timer_start' DEBUG
 
-##################################
-### returns the last 2 fields of the working directory
-pwdtail () {
-    pwd | awk -F/ '{nlast = NF -1;print $nlast"/"$NF}' #TODO: Use for something?
-}
+
 #################################################################
 #################################################################
 #################################################################
@@ -97,10 +77,10 @@ if [ "$color_prompt" = yes ]; then
         ### Setup if else for different color themes
 
         ### set theme var
-        THEME_VAR=1
+        THEME_VAR=4
 
         ### Set Path col variable
-        PATH_COL_VAR=0
+        PATH_COL_VAR=1
         PATH_COL=${PATH_COLS_ARR[${PATH_COL_VAR}]}
 
         # lookup array from _bash_colour_defs

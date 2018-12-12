@@ -145,3 +145,5 @@ function format_git_stats() {
     fi
     echo "${gupdown}${TXTCOL}${gbranchstr}${dirty_state}${joined_gitstats}"
 }
+
+
