@@ -1,3 +1,10 @@
+##################################
+### git branch functions
+# check https://github.com/magicmonty/bash-git-prompt
+# http://stackoverflow.com/questions/2657935/checking-for-a-dirty-index-or-untracked-files-with-git
+# https://github.com/jimeh/git-aware-prompt/blob/master/prompt.sh
+
+
 https://github.com/arialdomartini/oh-my-git
 
 function parse_git() {
@@ -45,9 +52,9 @@ function find_git_branch() {
 #############################
 function get_git_commid() {
     ### get current commit hash
-    curr_commitid=`git rev-parse --short HEAD 2> /dev/null`
+    curr_commitid=$(git rev-parse --short HEAD 2> /dev/null)
     ### get previous commit hash
-    prev_commitid=`git rev-list --max-count=2 --abbrev-commit HEAD  | tail -1`
+    prev_commitid=$(git rev-list --max-count=2 --abbrev-commit HEAD  | tail -1)
     echo "${BARCOL}──${TXTCOL}[c~${curr_commitid}]${BARCOL}──${TXTCOL}[p~${prev_commitid}]"
 }
 
@@ -69,10 +76,10 @@ function find_git_dirty() {
 #############################
 function git_com_diff() {
     ### Check how far git branch is relative to origin
-    gbranchrel=`git status 2> /dev/null | grep "Your branch is"`
-    gup=`echo $gbranchrel 2> /dev/null | grep ahead`
-    gdown=`echo $gbranchrel 2> /dev/null | grep behind`
-    grelN=`echo $gbranchrel | sed -nr 's/.*by ([0-9]+) commit?[a-z]./\1/p'`
+    gbranchrel=$(git status 2> /dev/null | grep "Your branch is")
+    gup=$(echo $gbranchrel 2> /dev/null | grep ahead)
+    gdown=$(echo $gbranchrel 2> /dev/null | grep behind)
+    grelN=$(echo $gbranchrel | sed -nr 's/.*by ([0-9]+) commit?[a-z]./\1/p')
 
     ### uniode symbols at : http://panmental.de/symbols/
     gupdown=""
@@ -89,12 +96,12 @@ function git_com_diff() {
 #############################
 function format_git_stats() {
     ##########################################
-    gporcelain=`git status --porcelain 2> /dev/null`
-    untrN=`echo $gporcelain | tr ' ' '\n' | grep -w '??' | wc -l` # untracked
-    addN=`echo $gporcelain | tr ' ' '\n' | grep -w '^A' | wc -l`  # added
-    modN=`echo $gporcelain | tr ' ' '\n' | grep -w '^M' | wc -l`  # modified
-    commN=`echo $gporcelain | tr ' ' '\n' | grep -w '^AM' | wc -l`  # added & modified?
-    delN=`echo $gporcelain | tr ' ' '\n' | grep -w '^D' | wc -l`  # deleted
+    gporcelain=$(git status --porcelain 2> /dev/null)
+    untrN=$(echo $gporcelain | tr ' ' '\n' | grep -w '??' | wc -l) # untracked
+    addN=$(echo $gporcelain | tr ' ' '\n' | grep -w '^A' | wc -l)  # added
+    modN=$(echo $gporcelain | tr ' ' '\n' | grep -w '^M' | wc -l)  # modified
+    commN=$(echo $gporcelain | tr ' ' '\n' | grep -w '^AM' | wc -l)  # added & modified?
+    delN=$(echo $gporcelain | tr ' ' '\n' | grep -w '^D' | wc -l)  # deleted
 
     ### Build up visible legend & git stats depending on what is appropriate
 
@@ -126,7 +133,7 @@ function format_git_stats() {
     fi
 
     ### add "/" charcaters between numbers - WIP
-    #gitstats_str=`echo $gitstats_str > /dev/null | sed "s/${gitlegend}/&{gitlegend}\//g"` # | sed 's/\/$//'`
+    #gitstats_str=$(echo $gitstats_str > /dev/null | sed "s/${gitlegend}/&{gitlegend}\//g"` # | sed 's/\/$//')
     gitlegend="${gitlegend}${SLATE}: "
 
 
@@ -138,3 +145,5 @@ function format_git_stats() {
     fi
     echo "${gupdown}${TXTCOL}${gbranchstr}${dirty_state}${joined_gitstats}"
 }
+
+

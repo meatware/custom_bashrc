@@ -1,0 +1,40 @@
+#Regular Colors
+Black='\[\e[0;30m\]'        # BlackReg
+Red='\[\e[0;31m\]'          # RedReg
+Green='\[\e[0;32m\]'        # GreenReg
+Yellow='\[\e[0;33m\]'       # YellowReg
+Blue='\[\e[0;34m\]'         # BlueReg
+Purple='\[\e[0;35m\]'       # PurpleReg
+Cyan='\[\e[0;36m\]'         # CyanReg
+White='\[\e[0;37m\]'        # WhiteReg
+
+#Bold
+BBlack='\[\e[1;30m\]'       # BlackBold
+BRed='\[\e[1;31m\]'         # RedBold
+BGreen='\[\e[1;32m\]'       # GreenBold
+BYellow='\[\e[1;33m\]'      # YellowBold
+BBlue='\[\e[1;34m\]'        # BlueBold
+BPurple='\[\e[1;35m\]'      # PurpleBold
+BCyan='\[\e[1;36m\]'        # CyanBold
+BWhite='\[\e[1;37m\]'       # WhiteBold
+
+#HIgh Intensity
+IBlack='\[\e[0;90m\]'       # BlackHI
+IRed='\[\e[0;91m\]'         # RedHI
+IGreen='\[\e[0;92m\]'       # GreenHI
+IYellow='\[\e[0;93m\]'      # YellowHI
+IBlue='\[\e[0;94m\]'        # BlueHI
+IPurple='\[\e[0;95m\]'      # PurpleHI
+ICyan='\[\e[0;96m\]'        # CyanHI
+IWhite='\[\e[0;97m\]'       # WhiteHI
+
+#BoldHIgh Intensity
+BIBlack='\[\e[1;90m\]'      # BlackBHI
+BIRed='\[\e[1;91m\]'        # RedBHI
+BIGreen='\[\e[1;92m\]'      # GreenBHI
+BIYellow='\[\e[1;93m\]'     # YellowBHI
+BIBlue='\[\e[1;94m\]'       # BlueBHI
+BIPurple='\[\e[1;95m\]'     # PurpleBHI
+BICyan='\[\e[1;96m\]'       # CyanBHI
+BIWhite='\[\e[1;97m\]'      # WhiteBHI
+

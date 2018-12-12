@@ -6,6 +6,19 @@ function Ngedit(){ command gedit --new-window "$@" &>/dev/null & }
 
 function terminator(){ command terminator --geometry=945x1200+0+0 "$@" &>/dev/null & }
 
+function sshub(){
+    # usage sshub 172.17.0.1
+    HOST_ADDR="$1"
+    ssh -A ubuntu@${HOST_ADDR}
+}
+
+function sshbast(){
+    # ssh via hump host
+    # You need to have added your .pem key via ssh-add -k
+    # usage sshub 172.17.0.1 # just add the machine you want to jump to
+    HOST_ADDR="$1"
+    ssh -A -J username@bastion.com ubuntu@${HOST_ADDR}
+}
 
 ################################################
 alias gh='history | grep ' # shows all history
@@ -18,26 +31,27 @@ alias gh='history | grep ' # shows all history
 #   ghf {command}
 #  Execute {command-number} after a call to ghf
 #   !! {command-number}
-function latest-history { history | tail -n 50 ; }
+function latest_history { history | tail -n 50 ; }
 
-function grepped-history { history | grep "$1" ; }
+function grepped_history { history | grep "$1" ; }
 
-function chop-first-column { awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}' ; }
+function chop_first_column { awk '{for (i=2; i<NF; i++) printf $i " "; print $NF}' ; }
 
-function add-line-numbers { awk '{print NR " " $0}' ; }
+function add_line_numbers { awk '{print NR " " $0}' ; }
 
-function top-ten { sort | uniq -c | sort -r | head -n 10 ; }
+function top_ten { sort | uniq -c | sort -r | head -n 10 ; }
 
-function unique-history { chop-first-column | top-ten | chop-first-column | add-line-numbers ; }
+function unique_history { chop_first_column | top_ten | chop_first_column | add_line_numbers ; }
 
 function ghf {
-  if [ $# -eq 0 ]; then latest-history | unique-history; fi
-  if [ $# -eq 1 ]; then grepped-history "$1" | unique-history; fi
-  if [ $# -eq 2 ]; then
-    `grepped-history "$1" | unique-history | grep ^$2 | chop-first-column`;
-  fi
+    if [ $# -eq 0 ]; then latest_history | unique_history; fi
+    if [ $# -eq 1 ]; then grepped_history "$1" | unique_history; fi
+    if [ $# -eq 2 ]; then
+        $(grepped_history "$1" | unique_history | grep ^$2 | chop_first_column)
+    fi
 }
-##################################
+
+################################################
 # https://stackoverflow.com/questions/14750650/how-to-delete-history-of-last-10-commands-in-shell
 histdeln(){
   # deletes the last n lines of history including del history command
@@ -50,8 +64,22 @@ histdeln(){
 }
 
 histdel(){
-  for h in $(seq $1 $2 | tac); do
-    history -d $h
-  done
-  history -d $(history 1 | awk '{print $1}')
+    for h in $(seq $1 $2 | tac); do
+        history -d $h
+    done
+    history -d $(history 1 | awk '{print $1}')
 }
+
+################################################
+grepo() {
+    # finds all files in current directory recursively and searches each for grep pattern
+    # (case insensitive)
+    find . -name "*" -exec grep -si $1 {}  \;
+}
+
+grepoall() {
+    # finds all files in current directory recursively and searches each for grep pattern
+    # Shows the file name in which the pattern was found (case insensitive + linenumber)
+    find . -name "*" -exec grep -sin $1 {} /dev/null \;
+}
+
