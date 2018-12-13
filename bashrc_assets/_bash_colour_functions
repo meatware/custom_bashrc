@@ -1,6 +1,14 @@
+# mod: bashrc_assets/_bash_colour_functions
+# txt: Module that deals with theme colour.
+
+
+# fun: colsw switches theme colour
+# opt: int: integer that indexes available themes
+# use: colsw n
+# api: colsw
 function colsw(){
     ## switches theme color set by $THEME_VAR vals
-
+    PRINTCOLVAR="ON"
     local NEWCOL=${1}
 
     ### If not an integer - default to theme val 0
@@ -25,7 +33,6 @@ function colsw(){
     cat ~/.bashrc | sed "s/THEME_VAR=${CURRCOL}/THEME_VAR=${NEWCOL}/" > ~/.bashrc_temp && cp ~/.bashrc_temp ~/.bashrc
 
     ### Debugging switch for when using theme_generator.py
-    PRINTCOLVAR="ON"
     if [ $PRINTCOLVAR = "ON" ]; then
         BARCOL_NAME=${BARCOL_ARR[${THEME_VAR}]}
         TXTCOL_NAME=${TXTCOL_ARR[${THEME_VAR}]}
@@ -36,18 +43,29 @@ function colsw(){
     source ~/.bashrc
 }
 
+# fun: copy bashrc for root user
+# use: col_cp_root
+# api: col_cp_root
+# txt: status - broken
 function col_cp_root(){
     ## copies .bashrc to root
     sudo cp ~/.bashrc /root/
     #source ~/.bashrc
 }
 
+# fun: col_ssh copies theme colour to a remote ssh host
+# opt: string: ssh username@hostnames
+# use: col_ssh username@hostame
+# api: colsw
+# txt: status - broken
 function col_ssh(){
     ## copies .bashrc to remote host specified by $1 commandline arg
     rsync -av ~/.bashrc ${1}:~/
 }
 
-#############################
+# fun: virtualenv_info detects if a python virtualenv is being used to display in prompt
+# use: prompt_command() uses this
+# api: internal
 function virtualenv_info(){
     # Get Virtual Env
     if [[ -n "$VIRTUAL_ENV" ]]; then
@@ -62,6 +80,11 @@ function virtualenv_info(){
 
 ##################################
 ### returns the last 2 fields of the working directory
+# fun: pwdtail
+# opt: int: integer that indexes available themes
+# use: prompt_command() uses this to show shortened path in terminal title bar
+# api: internal
+# txt: status - unknown
 pwdtail () {
     pwd | awk -F/ '{nlast = NF -1;print $nlast"/"$NF}' #TODO: Use for something?
 }
