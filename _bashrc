@@ -77,7 +77,7 @@ if [ "$color_prompt" = yes ]; then
         ### Setup if else for different color themes
 
         ### set theme var
-        THEME_VAR=4
+        THEME_VAR=3
 
         ### Set Path col variable
         PATH_COL_VAR=1
@@ -111,9 +111,9 @@ if [ "$color_prompt" = yes ]; then
         ###################################################
         ### set color coded error string for prompt depending on success of last command
         if [[ $last_status == "0" ]]; then
-            ERRPROMPT="\[\033[1;5;32m\]${ENDBIT} "
+            ERRPROMPT="\[\033[1;1;32m\]${ENDBIT} "
         else
-            ERRPROMPT='\[\033[1;5;31m\]X '
+            ERRPROMPT='\[\033[1;1;31m\]X '
         fi
 
         ###################################################
