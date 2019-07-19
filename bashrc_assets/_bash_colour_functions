@@ -38,13 +38,18 @@ function colsw(){
 
 function col_cp_root(){
     ## copies .bashrc to root
-    sudo cp ~/.bashrc /root/
-    #source ~/.bashrc
+    sudo cp ~/custom_bashrc/.bashrc /root/
+    sudo cp -rf ~/custom_bashrc /root/
+    sudo su root
+    source /root/.bashrc
 }
 
 function col_ssh(){
-    ## copies .bashrc to remote host specified by $1 commandline arg
-    rsync -av ~/.bashrc ${1}:~/
+    ## copies .bashrc to remote host specified by $1 commandline arg user@remotehost
+    #rsync -av ~/.bashrc ${1}:~/
+    rsync -av ~/custom_bashrc ${1}:~/
+    ssh -A "${1}" 'mv .bashrc .your_old_bashrc' 
+    ssh -A "${1}" 'ln -s ~/custom_bashrc/_bashrc ~/.bashrc'
 }
 
 #############################
