@@ -12,6 +12,12 @@ function sshub(){
     ssh -A ubuntu@${HOST_ADDR}
 }
 
+function sshec2(){
+    # usage sshub 172.17.0.1
+    HOST_ADDR="$1"
+    ssh -A ec2-user@${HOST_ADDR}
+}
+
 function sshbast(){
     # ssh via hump host
     # You need to have added your .pem key via ssh-add -k
