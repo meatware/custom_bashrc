@@ -89,3 +89,13 @@ grepoall() {
     find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -iname "*" -exec grep -Isin $1 {} /dev/null \;
 }
 
+venv_create() {
+    # takes argument like python3.6
+    pyth_ver=$(which $1)
+    $pyth_ver -m venv venv
+    source venv/bin/activate
+}
+
+venv_activate() {
+    source venv/bin/activate
+}
