@@ -5,6 +5,11 @@ alias ll='/bin/ls -lhta --color'
 alias edbash='gedit ~/.bashrc &'
 alias F5='source ~/.bashrc'
 
+function mkcd() {
+    #Make a folder and go into it
+    mkdir -p $1; cd $1
+}
+
 alias his='history'
 
 #############################################
