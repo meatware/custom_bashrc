@@ -77,7 +77,7 @@ if [ "$color_prompt" = yes ]; then
         ### Setup if else for different color themes
 
         ### set theme var
-        THEME_VAR=8
+        THEME_VAR=58
 
         ### Set Path col variable
         PATH_COL_VAR=1
