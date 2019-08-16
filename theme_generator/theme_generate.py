@@ -26,7 +26,7 @@ print()
 
 # remove colours taht don't work on black screen
 # (large list) del_list = ["Black", "BBlack", "IBlack", "BIBlack", "White", "BWhite", "IWhite", "BIWhite"] #, "", "", "", "", "", "", ""]
-del_list = ["GRAY", "DKGRAY", "HIBlack", "HIWhite"] 
+del_list = ["GRAY", "DKGRAY", "HIBlack", "HIWhite", "TERGREEN"] 
 for rm_col in del_list:
     col_names.remove(rm_col)
 
@@ -46,8 +46,8 @@ perm_list = list(perm)
 
 macro_bar = "BARCOL_ARR=("
 macro_text = "TXTCOL_ARR=("
-for combo in perm_list:
-    print(combo)
+for idx, combo in enumerate(perm_list):
+    print(idx, combo)
 
     macro_bar = macro_bar + """'${""" + combo[0] + """}' """
     macro_text = macro_text + """'${""" + combo[1] + """}' """
@@ -56,9 +56,9 @@ macro_bar = macro_bar + ")"
 macro_text = macro_text + ")"
 
 print()
-print(macro_bar) # goes into custom_bashrc/bashrc_assets/_bash_colour_defs.sh
+print(macro_bar.replace("\'", "\"")) # goes into custom_bashrc/bashrc_assets/_bash_colour_defs.sh
 print()
-print(macro_text) # goes into custom_bashrc/bashrc_assets/_bash_colour_defs.sh
+print(macro_text.replace("\'", "\"")) # goes into custom_bashrc/bashrc_assets/_bash_colour_defs.sh
 
 print()
 print("len(macro_bar)", len(macro_bar))

@@ -29,7 +29,7 @@ function colsw(){
     if [ $PRINTCOLVAR = "ON" ]; then
         BARCOL_NAME=${BARCOL_ARR[${THEME_VAR}]}
         TXTCOL_NAME=${TXTCOL_ARR[${THEME_VAR}]}
-        echo "BARCOL = ${BARCOL_NAME}"
+        echo "BARCOL = ${BARCOL_NAME}" #" ${BARCOL_ARR[!${THEME_VAR}]}"
         echo "TXTCOL = ${TXTCOL_NAME}"
     fi
 
