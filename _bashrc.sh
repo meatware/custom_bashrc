@@ -11,11 +11,11 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 # Source bashrc assets
-. $HOME/custom_bashrc/bashrc_assets/_bash_colour_functions
-. $HOME/custom_bashrc/bashrc_assets/_bash_helper_functions
-. $HOME/custom_bashrc/bashrc_assets/_bash_colour_defs
-. $HOME/custom_bashrc/bashrc_assets/_bash_git_functions
-. $HOME/custom_bashrc/bashrc_assets/_bash_aliases
+. $HOME/custom_bashrc/bashrc_assets/_bash_colour_functions.sh
+. $HOME/custom_bashrc/bashrc_assets/_bash_helper_functions.sh
+. $HOME/custom_bashrc/bashrc_assets/_bash_colour_defs.sh
+. $HOME/custom_bashrc/bashrc_assets/_bash_git_functions.sh
+. $HOME/custom_bashrc/bashrc_assets/_bash_aliases.sh
 
 
 

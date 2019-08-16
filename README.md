@@ -13,15 +13,6 @@
 ```
 cd
 git clone https://github.com/meatware/custom_bashrc.git
-mv .bashrc .your_old_bashrc; ln -s ~/custom_bashrc/_bashrc ~/.bashrc
-```
-
-#### Optional: Quick-create git branch make changes in ~
-```
-cd ~/custom_bashrc
-MYHOST="$(hostname)"
-MYNAME="$(whoami)"
-MYGITBRANCH="${MYNAME}/${MYHOST}_changes"
-git checkout -b "$MYGITBRANCH"
+mv .bashrc .your_old_bashrc; ln -s ~/custom_bashrc/_bashrc.sh ~/.bashrc
 ```
 
