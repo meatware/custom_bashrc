@@ -1,37 +1,55 @@
 function colsw(){
     ## switches theme color set by $THEME_VAR vals
 
-    local NEWCOL=${1}
+    local NEWCOL_IDX=${1}
 
     ### If not an integer - default to theme val 0
     REX=^[0-9]*$
-    if [[ "$NEWCOL" =~ $REX ]]; then
+    if [[ "$NEWCOL_IDX" =~ $REX ]]; then
         true # pass TODO: figure out annoying regex not
     else
-        echo "$NEWCOL is not a valid no for THEME_VAR"
-        NEWCOL=0
+        echo "$NEWCOL_IDX is not a valid no for THEME_VAR"
+        echo "Setting to default theme"
+        NEWCOL_IDX=0
     fi
 
-    ### check if integer is between 0 and number of max theme array index
-    if [ "$NEWCOL" -ge 0 -a "$NEWCOL" -lt "$BARCOL_ARR_LEN" ]; then
-        local NEWCOL=$NEWCOL
+    ### check if integer is between 0 and number of max theme array index (in _bash_colour_defs.sh)
+    if [ "$NEWCOL_IDX" -ge 0 -a "$NEWCOL_IDX" -lt "$BARCOL_ARR_LEN" ]; then
+        local NEWCOL_IDX=$NEWCOL_IDX
     else
-        echo " $NEWCOL is not a valid index no for THEME_VAR"
-        local NEWCOL=0
+        echo " $NEWCOL_IDX is not a valid index no for THEME_VAR"
+        local NEWCOL_IDX=0
     fi
 
-    cp ~/custom_bashrc/_bashrc.sh ~/custom_bashrc/.bashrc_OG_sh ### create failsafebackup first
-    local CURRCOL=$(grep "THEME_VAR=" ~/custom_bashrc/_bashrc.sh | grep -v sed | tr '=' ' ' | awk '{print $2}')
-    cat ~/custom_bashrc/_bashrc.sh | sed "s/THEME_VAR=${CURRCOL}/THEME_VAR=${NEWCOL}/" > ~/custom_bashrc/_bashrc.sh_temp && 
-    mv ~/custom_bashrc/_bashrc.sh_temp ~/custom_bashrc/_bashrc.sh
+    ### create failsafebackup first
+    cp ~/custom_bashrc/theme_settings.sh ~/custom_bashrc/theme_settings_BACKUP.sh 
+    local CURRCOL_IDX=$(grep "SET_THEME_VAR=" ~/custom_bashrc/theme_settings.sh | grep -v sed | tr '=' ' ' | awk '{print $2}')
+
+    # This just replaced the existing one with the same one
+    # change SET_PATH_COL in another function
+    local CURRPATHCOL_IDX=$(grep "SET_PATH_COL_VAR=" ~/custom_bashrc/theme_settings.sh | grep -v sed | tr '=' ' ' | awk '{print $2}' | sed 's/\"//g')
+
+    ##################################################
+cat << BACON > ~/custom_bashrc/theme_settings.sh
+#!/bin/bash 
+
+SET_THEME_VAR="${NEWCOL_IDX}"
+SET_PATH_COL_VAR=${CURRPATHCOL_IDX}    
+SET_PATH_COL="${PATH_COLS_ARR[${CURRPATHCOL_IDX}]}"
+SET_BARCOL="${BARCOL_ARR[${NEWCOL_IDX}]}"
+TXTCOL_NAME="${TXTCOL_ARR[${NEWCOL_IDX}]}"
+BACON
+    ###################################################
 
     ### Debugging switch for when using theme_generator.py
     PRINTCOLVAR="ON"
     if [ $PRINTCOLVAR = "ON" ]; then
+        PATHCOL_NAME=${PATH_COLS_ARR[${CURRPATHCOL_IDX}]}
         BARCOL_NAME=${BARCOL_ARR[${THEME_VAR}]}
         TXTCOL_NAME=${TXTCOL_ARR[${THEME_VAR}]}
-        echo "BARCOL = ${BARCOL_NAME}" #" ${BARCOL_ARR[!${THEME_VAR}]}"
+        echo "BARCOL = ${BARCOL_NAME}"
         echo "TXTCOL = ${TXTCOL_NAME}"
+        echo "PATHCOL = ${PATHCOL_NAME}"
     fi
 
     source ~/custom_bashrc/_bashrc.sh
