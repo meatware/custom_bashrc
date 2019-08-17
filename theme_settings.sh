@@ -1,0 +1,7 @@
+#!/bin/bash 
+
+SET_THEME_VAR="58"
+SET_BARCOL="\[\033[38;5;226m\]"
+SET_TXTCOL="\[\033[1;35m\]"
+SET_PATHCOL_VAR="1"
+SET_PATHCOL="\[\033[0;37m\]"

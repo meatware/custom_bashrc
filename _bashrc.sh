@@ -11,6 +11,7 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 # Source bashrc assets
+. $HOME/custom_bashrc/theme_settings.sh
 . $HOME/custom_bashrc/bashrc_assets/_bash_colour_functions.sh
 . $HOME/custom_bashrc/bashrc_assets/_bash_helper_functions.sh
 . $HOME/custom_bashrc/bashrc_assets/_bash_colour_defs.sh
@@ -75,17 +76,11 @@ if [ "$color_prompt" = yes ]; then
 
         ###################################################
         ### Setup if else for different color themes
-
-        ### set theme var
-        THEME_VAR=32
-
-        ### Set Path col variable
-        PATH_COL_VAR=1
-        PATH_COL=${PATH_COLS_ARR[${PATH_COL_VAR}]}
-
-        # lookup array from _bash_colour_defs
-        BARCOL=${BARCOL_ARR[${THEME_VAR}]}
-        TXTCOL=${TXTCOL_ARR[${THEME_VAR}]}
+        PATH_COL_VAR="${SET_PATHCOL_VAR}"
+        PATH_COL="${SET_PATHCOL}"
+        THEME_VAR="${SET_THEME_VAR}"
+        BARCOL="${SET_BARCOL}"
+        TXTCOL="${SET_TXTCOL}"
 
         ###################################################
         ### Turn the prompt symbol red if the user is root
