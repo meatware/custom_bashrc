@@ -76,8 +76,8 @@ if [ "$color_prompt" = yes ]; then
 
         ###################################################
         ### Setup if else for different color themes
-        PATH_COL_VAR="${SET_PATH_COL_VAR}"
-        PATH_COL="${SET_PATH_COL}"
+        PATH_COL_VAR="${SET_PATHCOL_VAR}"
+        PATH_COL="${SET_PATHCOL}"
         THEME_VAR="${SET_THEME_VAR}"
         BARCOL="${SET_BARCOL}"
         TXTCOL="${SET_TXTCOL}"

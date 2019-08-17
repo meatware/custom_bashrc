@@ -50,7 +50,7 @@ BCYAN="\[\033[1;1;36m\]"
 # # Bold
 # BBlack="\[\e[1;30m\]"       # Black
 # BRed="\[\e[1;31m\]"         # Red
-# BGreen="\[\e[1;32m\]"       # Green
+BGreen="\[\e[1;32m\]"       # Green
 # BYellow="\[\e[1;33m\]"      # Yellow
 # BBlue="\[\e[1;34m\]"        # Blue
 # BPurple="\[\e[1;35m\]"      # Purple
@@ -108,8 +108,8 @@ BCYAN="\[\033[1;1;36m\]"
 # On_IWhite="\[\e[0;107m\]"   # White
 #############
 
-PATH_COLS_ARR=("${WHITE}" "${GRAY}" "${DKGRAY}" "${UGreen}")
-
+PATH_COLS_ARR=("${WHITE}" "${GRAY}" "${DKGRAY}" "${BGreen}" "${HIPurple}" "${HIYellow}")
+PATHCOLS_ARR_LEN="${#PATH_COLS_ARR[@]}"
 # short array that works
 #                0          1          2           3          4            5              6          7           8              9
 #BARCOL_ARR=("${SLATE}" "${BCYAN}" "${MORANGE}" "${LBLUE}"  "${LBLUE}" "${LGREEN}"     "${VBLUE}" "${HIRed}" "${HIPurple}" "${TERGREEN}")
