@@ -5,9 +5,9 @@
 #fi
 
 # Source global definitions
-# Enable programmable completion features.
-if [ -f /etc/bash_completion ]; then
-    source /etc/bash_completion
+# Enable programmable completion features for ubuntu.
+if [ -f /etc/profile.d/bash_completion.sh ]; then
+    source /etc/profile.d/bash_completion.sh
 fi
 
 # Source bashrc assets
@@ -18,7 +18,9 @@ fi
 . $HOME/custom_bashrc/bashrc_assets/_bash_git_functions.sh
 . $HOME/custom_bashrc/bashrc_assets/_bash_aliases.sh
 
-
+# https://superuser.com/questions/288714/bash-autocomplete-like-zsh
+bind 'set show-all-if-ambiguous on'
+bind 'TAB:menu-complete'
 
 #################################################################
 #################################################################
