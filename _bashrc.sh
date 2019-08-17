@@ -77,7 +77,7 @@ if [ "$color_prompt" = yes ]; then
         ### Setup if else for different color themes
 
         ### set theme var
-        THEME_VAR=58
+        THEME_VAR=32
 
         ### Set Path col variable
         PATH_COL_VAR=1
@@ -122,7 +122,7 @@ if [ "$color_prompt" = yes ]; then
 
 ## move out of tabs to avoid formatting horror (still in function)
 PS1="${debian_chroot:+($debian_chroot)}\n\
-${YELLOW}${BARCOL}┌──\
+${BARCOL}┌──\
 ${TXTCOL}[\u]\
 ${BARCOL}──\
 ${TXTCOL}[\H]\
