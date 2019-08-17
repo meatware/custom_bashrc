@@ -102,6 +102,8 @@ if [ "$color_prompt" = yes ]; then
 
         VIRTENV=$(virtualenv_info)
 
+        SSH_SESSION=$(ssh_info)
+
 
         ###################################################
         ### set color coded error string for prompt depending on success of last command
@@ -124,7 +126,7 @@ ${TXTCOL}[\H]\
 ${BARCOL}──\
 ${TXTCOL}[speed: ${timer_show}s]\
 $(parse_git)\
-${VIRTENV}
+${VIRTENV}${SSH_SESSION}
 ${BARCOL}│${DKGRAY}${TTY_VAR}${PATH_COL}> \w \
 \n${BARCOL}└──\
 ${TXTCOL}`date +"%H:%M"`\

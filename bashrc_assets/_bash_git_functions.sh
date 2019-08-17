@@ -5,7 +5,7 @@
 # https://github.com/jimeh/git-aware-prompt/blob/master/prompt.sh
 
 
-https://github.com/arialdomartini/oh-my-git
+# https://github.com/arialdomartini/oh-my-git
 
 function parse_git() {
 

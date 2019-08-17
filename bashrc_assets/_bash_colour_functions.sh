@@ -95,7 +95,7 @@ SET_PATHCOL_VAR="${NEWPATH_IDX}"
 SET_PATHCOL="${NEWPATH_COL}"
 CHEESE
     ###################################################
-
+    echo "No of Themes: $BARCOL_ARR_LEN"
     source ~/custom_bashrc/_bashrc.sh
 }
 
@@ -110,10 +110,8 @@ function col_cp_root(){
 
 function col_ssh(){
     ## copies .bashrc to remote host specified by $1 commandline arg user@remotehost
-    #rsync -av ~/custom_bashrc/_bashrc.sh ${1}:~/
     rsync -av ~/custom_bashrc ${1}:~/
-    ssh -A "${1}" 'mv .bashrc .your_old_bashrc'
-    ssh -A "${1}" 'ln -s ~/custom_bashrc/_bashrc.sh ~/.bashrc'
+    ssh -A "${1}" 'mv ~/.bashrc ~/.your_old_bashrc; ln -s ~/custom_bashrc/_bashrc.sh ~/.bashrc'
 }
 
 #############################
@@ -127,6 +125,15 @@ function virtualenv_info(){
         venv=''
     fi
     [[ -n "$venv" ]] && echo "${BARCOL}──${TXTCOL}[${HIRed}venv: $venv${TXTCOL}]"
+}
+
+function ssh_info(){
+    if pstree -p | egrep --quiet --extended-regexp ".*sshd.*\($$\)"; then
+    ssh_state="ssh-sess"
+    else
+    ssh_state=""
+    fi
+    [[ -n "$ssh_state" ]] && echo "${BARCOL}──${TXTCOL}[${HIRed}${ssh_state}${TXTCOL}]"
 }
 
 ##################################

@@ -17,7 +17,7 @@ alias his='history'
 #############################################
 
 # git diff
-https://coderwall.com/p/pa5whg/git-side-by-side-diff-in-terminal
+# https://coderwall.com/p/pa5whg/git-side-by-side-diff-in-terminal
 alias gdiff='git difftool -y -x "sdiff -w $COLUMNS" | less'
 
 alias gs='git status '
