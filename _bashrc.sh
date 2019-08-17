@@ -20,7 +20,8 @@ fi
 
 # https://superuser.com/questions/288714/bash-autocomplete-like-zsh
 bind 'set show-all-if-ambiguous on'
-bind 'TAB:menu-complete'
+bind 'set colored-completion-prefix on'
+#bind 'TAB:menu-complete'
 
 #################################################################
 #################################################################
