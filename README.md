@@ -2,10 +2,8 @@
 
 
 ### Things to do:
-1. separate into multiple files - source functions
-2. tidy up code faster shell check
-3. fix last command time
-4. Fix color import and make split files less messy
+1. tidy up code faster shell check
+2. fix last command time
 
 ### Installation
 
@@ -13,6 +11,7 @@
 ```
 cd
 git clone https://github.com/meatware/custom_bashrc.git
-mv .bashrc .your_old_bashrc; ln -s ~/custom_bashrc/_bashrc.sh ~/.bashrc
+mv .bashrc .your_old_bashrc
+ln -s ~/custom_bashrc/_bashrc.sh ~/.bashrc
 ```
 

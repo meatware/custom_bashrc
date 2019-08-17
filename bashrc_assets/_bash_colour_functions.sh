@@ -20,9 +20,10 @@ function colsw(){
         local NEWCOL=0
     fi
 
-    cp ~/.bashrc ~/.bashrc_OG ### create failsafebackup first
-    local CURRCOL=$(grep "THEME_VAR=" ~/.bashrc | grep -v sed | tr '=' ' ' | awk '{print $2}')
-    cat ~/.bashrc | sed "s/THEME_VAR=${CURRCOL}/THEME_VAR=${NEWCOL}/" > ~/.bashrc_temp && cp ~/.bashrc_temp ~/.bashrc
+    cp ~/custom_bashrc/_bashrc.sh ~/custom_bashrc/.bashrc_OG_sh ### create failsafebackup first
+    local CURRCOL=$(grep "THEME_VAR=" ~/custom_bashrc/_bashrc.sh | grep -v sed | tr '=' ' ' | awk '{print $2}')
+    cat ~/custom_bashrc/_bashrc.sh | sed "s/THEME_VAR=${CURRCOL}/THEME_VAR=${NEWCOL}/" > ~/custom_bashrc/_bashrc.sh_temp && 
+    mv ~/custom_bashrc/_bashrc.sh_temp ~/custom_bashrc/_bashrc.sh
 
     ### Debugging switch for when using theme_generator.py
     PRINTCOLVAR="ON"
@@ -33,23 +34,24 @@ function colsw(){
         echo "TXTCOL = ${TXTCOL_NAME}"
     fi
 
-    source ~/.bashrc
+    source ~/custom_bashrc/_bashrc.sh
 }
 
 function col_cp_root(){
     ## copies .bashrc to root
-    sudo cp ~/custom_bashrc/.bashrc /root/
+    sudo mv /root/.bashrc /root/.your_old_bashrc
     sudo cp -rf ~/custom_bashrc /root/
+    sudo ln -s /root/custom_bashrc/_bashrc.sh /root/.bashrc
     sudo su root
     source /root/.bashrc
 }
 
 function col_ssh(){
     ## copies .bashrc to remote host specified by $1 commandline arg user@remotehost
-    #rsync -av ~/.bashrc ${1}:~/
+    #rsync -av ~/custom_bashrc/_bashrc.sh ${1}:~/
     rsync -av ~/custom_bashrc ${1}:~/
     ssh -A "${1}" 'mv .bashrc .your_old_bashrc'
-    ssh -A "${1}" 'ln -s ~/custom_bashrc/_bashrc ~/.bashrc'
+    ssh -A "${1}" 'ln -s ~/custom_bashrc/_bashrc.sh ~/.bashrc'
 }
 
 #############################
