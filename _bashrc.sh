@@ -1,9 +1,5 @@
 # .bashrc
 
-#if [ -f ~/.bashrc ]; then
-#   . ~/.bashrc
-#fi
-
 # Source global definitions
 # Enable programmable completion features for ubuntu.
 if [ -f /etc/profile.d/bash_completion.sh ]; then
@@ -26,7 +22,6 @@ bind 'set colored-completion-prefix on'
 #################################################################
 #################################################################
 #################################################################
-#####################
 # guides
 # http://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/
 # see https://github.com/nojhan/liquidprompt
@@ -67,16 +62,12 @@ if [ "$color_prompt" = yes ]; then
     function prompt_command() {
         ###################################################
         ### identify success/fail status of last command
-        ### DO NOT MOVE THIS COMMAND: must be first!
+        ### DO NOT MOVE THIS VARIABLE: must be first!
         local last_status=$?
         ###################################################
         ###################################################
         #timer_stop
-        ###################################################
-
-        local TITLEBAR=`pwdtail`
-        local TTY_VAR=`tty 2> /dev/null | awk -F/ '{nlast = NF 0;print $nlast$NF": "}'`
-
+        ###################################################        
         ###################################################
         ### Setup if else for different color themes
         PATH_COL_VAR="${SET_PATHCOL_VAR}"
@@ -98,15 +89,17 @@ if [ "$color_prompt" = yes ]; then
         fi # root bit
 
         ###################################################
-        ### set virtual environment if applicable
-
-        # disable the default virtualenv prompt change
+        ### Display virtual environment notification  if applicable
+        ## disable the default virtualenv prompt change
         export VIRTUAL_ENV_DISABLE_PROMPT=1
 
         VIRTENV=$(virtualenv_info)
 
+        ### Display ssh variable notification in prompt if aplicable
         SSH_SESSION=$(ssh_info)
 
+        # Display tty no in prompt
+        local TTY_VAR=`tty 2> /dev/null | awk -F/ '{nlast = NF 0;print $nlast$NF": "}'`
 
         ###################################################
         ### set color coded error string for prompt depending on success of last command
@@ -118,9 +111,10 @@ if [ "$color_prompt" = yes ]; then
 
         ###################################################
         ### set titlebar
+        local TITLEBAR=`pwdtail`
         echo -ne '\033]2;'${TTY_VAR}${TITLEBAR}'\007'
-
-## move out of tabs to avoid formatting horror (still in function)
+        
+## move out of indented tabs to avoid formatting horror (still in function)
 PS1="${debian_chroot:+($debian_chroot)}\n\
 ${BARCOL}┌──\
 ${TXTCOL}[\u]\
@@ -172,4 +166,5 @@ export VISUAL=vim
 EDITOR=vim
 export EDITOR
 
-[[ -s /home/bsgt/.autojump/etc/profile.d/autojump.sh ]] && source /home/bsgt/.autojump/etc/profile.d/autojump.sh
+# Entry for directory autojump: https://github.com/wting/autojump
+[[ -s ${HOME}/.autojump/etc/profile.d/autojump.sh ]] && source ${HOME}/.autojump/etc/profile.d/autojump.sh

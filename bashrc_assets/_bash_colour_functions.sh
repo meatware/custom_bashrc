@@ -81,11 +81,7 @@ function colsw_path(){
 
     ### create failsafebackup first
     cp ~/custom_bashrc/theme_settings.sh ~/custom_bashrc/theme_settings_BACKUP.sh 
-    
-    #local CURRPATH_IDX=$(grep "SET_PATH_COL_VAR=" ~/custom_bashrc/theme_settings.sh | grep -v sed | tr '=' ' ' | awk '{print $2}' | sed 's/\"//g')
-    #sed -i "s/SET_PATH_COL_VAR=${CURRPATH_IDX}/SET_PATH_COL_VAR=\"${NEWPATH_IDX}\"/" ~/custom_bashrc/theme_settings.sh
 
-    #local CURRPATH_COL="${PATH_COLS_ARR[${CURRPATH_IDX}]}"
     local NEWPATH_COL="${PATH_COLS_ARR[${NEWPATH_IDX}]}"
 
     sed -i "/^SET_PATHCOL/d" ~/custom_bashrc/theme_settings.sh
@@ -101,7 +97,7 @@ CHEESE
 }
 
 function col_cp_root(){
-    ## copies .bashrc to root
+    ## copies .bashrc to root home
     sudo mv /root/.bashrc /root/.your_old_bashrc
     sudo cp -rf ~/custom_bashrc /root/
     sudo ln -s /root/custom_bashrc/_bashrc.sh /root/.bashrc
@@ -117,7 +113,7 @@ function col_ssh(){
 
 #############################
 function virtualenv_info(){
-    # Get Virtual Env
+    # Get Virtual Env and display in prompt
     if [[ -n "$VIRTUAL_ENV" ]]; then
         # Strip out the path and just leave the env name
         venv="${VIRTUAL_ENV##*/}"
@@ -129,6 +125,7 @@ function virtualenv_info(){
 }
 
 function ssh_info(){
+    # Get ssh-sess info and display in prompt
     if pstree -p | egrep --quiet --extended-regexp ".*sshd.*\($$\)"; then
     ssh_state="ssh-sess"
     else
@@ -139,6 +136,7 @@ function ssh_info(){
 
 ##################################
 ### returns the last 2 fields of the working directory
+## for display in terminal titlebar
 pwdtail () {
     pwd | awk -F/ '{nlast = NF -1;print $nlast"/"$NF}' #TODO: Use for something?
 }
