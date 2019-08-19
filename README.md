@@ -7,13 +7,24 @@
 3. ~~say when logged in over ssh
 https://unix.stackexchange.com/questions/9605/how-can-i-detect-if-the-shell-is-controlled-from-ssh~~
 4. aws plugin 
-5. update git plugin
+    - current loaded profile
+5. update git aliases 
+    - to more common set
 6. alias progress to cp?
 7. ssh-add profiles
 8. setup_install
     - bash autocomlete
     - autojump
     - docker & docker-compose
+9. enable git_minimal prompt (speed up)
+    - function to turn off
+    - speed check
+10. enable compact 1 & 2 line prompt versions
+11. auto-completion improvements
+    - additional scripts
+    - autocomplete aliases
+12. additional functions
+
 
 ### Installation
 
