@@ -59,6 +59,7 @@ function __awskeys_list {
         echo "No profiles found in credentials file"
     fi
 }
+
 function __awskeys_show {
     local p_keys="$(__awskeys_get $1)"
     if [[ -n "${p_keys}" ]]; then
@@ -67,6 +68,7 @@ function __awskeys_show {
         echo "Profile $1 not found in credentials file"
     fi
 }
+
 function __awskeys_export {
     if [[ $(__awskeys_list) == *"$1"* ]]; then
         local p_keys=( $(__awskeys_get $1 | tr -d " ") )
@@ -81,9 +83,11 @@ function __awskeys_export {
         echo "Profile $1 not found in credentials file"
     fi
 }
+
 function __awskeys_unset {
     unset AWS_PROFILE AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
 }
+
 function __awskeys_comp {
     local cur prev opts prevprev
     COMPREPLY=()
@@ -103,4 +107,5 @@ function __awskeys_comp {
     COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
     return 0
 }
+
 complete -F __awskeys_comp awskeys

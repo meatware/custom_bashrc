@@ -103,8 +103,11 @@ if [ "$color_prompt" = yes ]; then
 
         VIRTENV=$(virtualenv_info)
 
-        ### Display ssh variable notification in prompt if aplicable
+        ### Display ssh variable notification in prompt if applicable
         SSH_SESSION=$(ssh_info)
+
+        ### Display AWS profile if applicable
+        CURR_AWS_PROFILE=$(aws_info)
 
         # Display tty no in prompt
         local TTY_VAR=`tty 2> /dev/null | awk -F/ '{nlast = NF 0;print $nlast$NF": "}'`
@@ -126,16 +129,14 @@ if [ "$color_prompt" = yes ]; then
 PS1="${debian_chroot:+($debian_chroot)}\n\
 ${BARCOL}┌──\
 ${TXTCOL}[\u]\
-${BARCOL}──\
+${BARCOL}─\
 ${TXTCOL}[\H]\
-${BARCOL}──\
-${TXTCOL}[speed: ${timer_show}s]\
 $(parse_git)\
-${VIRTENV}${SSH_SESSION}
+${VIRTENV}${SSH_SESSION}${CURR_AWS_PROFILE}
 ${BARCOL}│${DKGRAY}${TTY_VAR}${PATH_COL}> \w \
 \n${BARCOL}└──\
 ${TXTCOL}`date +"%H:%M"`\
-${BARCOL}──\
+${BARCOL}─\
 ${ERRPROMPT}${TERGREEN}"
 }
 
