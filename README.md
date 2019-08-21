@@ -3,7 +3,7 @@ I wrote this to learn more about bash. Many thanks to the code from projects lik
 
 ## Premise
 
-There are probably better framework swith more options. However, I need a prompt that I fully understand and can easily port to multiple machones as part of my job. Thus, this is the best config that work for me. By limiting options and adding to this repo gradually, I get to understand bash and the features incrementally.
+There are probably better frameworks with more options. However, I need a prompt that I fully understand and can easily port to multiple machines as part of my job. Thus, this is the best config that works for me. By limiting options and adding to this repo gradually, I get to understand bash and the features incrementally.
 
 ### Things to do:
 1. ~~tidy up code faster shell check~~
