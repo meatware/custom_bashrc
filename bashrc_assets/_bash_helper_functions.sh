@@ -90,10 +90,19 @@ grepoall() {
 }
 
 venv_create() {
-    # takes argument like python3.6
-    pyth_ver=$(which $1)
-    $pyth_ver -m venv venv
-    source venv/bin/activate
+    if [[ $# -ge 1 ]]; then
+        # takes argument like python3.6
+        desired_py_version=$1
+        pyth_ver=$(which $desired_py_version)
+        if [[ -z "${pyth_ver}" ]]; then
+            echo "python version $desired_py_version not found"
+        else
+            $pyth_ver -m venv venv
+            source venv/bin/activate        
+        fi
+    else
+        echo "supply an arg"
+    fi
 }
 
 venv_activate() {
