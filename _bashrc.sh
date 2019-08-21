@@ -6,6 +6,9 @@ if [ -f /etc/profile.d/bash_completion.sh ]; then
     source /etc/profile.d/bash_completion.sh
 fi
 
+# Load composure first, so we support function metadata
+. $HOME/custom_bashrc/modules/composure.sh
+
 # Source bashrc assets
 . $HOME/custom_bashrc/theme_settings.sh
 . $HOME/custom_bashrc/bashrc_assets/_bash_colour_functions.sh
@@ -13,6 +16,11 @@ fi
 . $HOME/custom_bashrc/bashrc_assets/_bash_colour_defs.sh
 . $HOME/custom_bashrc/bashrc_assets/_bash_git_functions.sh
 . $HOME/custom_bashrc/bashrc_assets/_bash_aliases.sh
+
+# source bash modules 
+. $HOME/custom_bashrc/modules/aws_module.sh
+
+
 
 # https://superuser.com/questions/288714/bash-autocomplete-like-zsh
 bind 'set show-all-if-ambiguous on'
