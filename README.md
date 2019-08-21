@@ -1,5 +1,5 @@
 # Custom Bashrc
-
+I wrote this to learn more about bash. Many thanks to the code from projects like bash-it and oh my zsh!
 
 ### Things to do:
 1. ~~tidy up code faster shell check~~
