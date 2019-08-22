@@ -119,19 +119,30 @@ function virtualenv_info(){
         venv="${VIRTUAL_ENV##*/}"
     else
         # In case you don't have one activated
-        venv=''
+        venv=""
     fi
-    [[ -n "$venv" ]] && echo "${BARCOL}──${TXTCOL}[${HIRed}venv: $venv${TXTCOL}]"
+    [[ -n "$venv" ]] && echo "${BARCOL}─${TXTCOL}[${HIRed}$venv${TXTCOL}]"
 }
 
 function ssh_info(){
     # Get ssh-sess info and display in prompt
     if pstree -p | egrep --quiet --extended-regexp ".*sshd.*\($$\)"; then
-    ssh_state="ssh-sess"
+        ssh_state="ssh"
     else
-    ssh_state=""
+        ssh_state=""
     fi
-    [[ -n "$ssh_state" ]] && echo "${BARCOL}──${TXTCOL}[${HIRed}${ssh_state}${TXTCOL}]"
+    [[ -n "$ssh_state" ]] && echo "${BARCOL}─${TXTCOL}[${HIRed}${ssh_state}${TXTCOL}]"
+}
+
+function aws_info(){
+    # Get aws profile info and display in prompt
+    aws_profile="$(printenv AWS_PROFILE)"
+    if [[ -n "${aws_profile}" ]]; then
+        set_aws_profile=${aws_profile}
+    else
+        set_aws_profile=""
+    fi
+    [[ -n "$set_aws_profile" ]] && echo "${BARCOL}─${TXTCOL}[${HIRed}${set_aws_profile}${TXTCOL}]"
 }
 
 ##################################

@@ -1,5 +1,19 @@
 # Custom Bashrc
+I wrote this to learn more about bash. Many thanks to the code from projects like bash-it and oh my zsh!
 
+## Premise
+
+There are probably better frameworks with more options. However, I need a prompt that I fully understand and can easily port to multiple machines as part of my job. Thus, this is the best config that works for me. By limiting options and adding to this repo gradually, I get to understand bash and the features incrementally. If you spot any improvements, feel free to submit a pull request!
+
+## Installation
+
+### Clone repo, activate via symlink and backup your pre-existing .bashrc
+```
+cd
+git clone https://github.com/meatware/custom_bashrc.git
+mv .bashrc .your_old_bashrc
+ln -s ~/custom_bashrc/_bashrc.sh ~/.bashrc
+```
 
 ### Things to do:
 1. ~~tidy up code faster shell check~~
@@ -26,13 +40,5 @@ https://unix.stackexchange.com/questions/9605/how-can-i-detect-if-the-shell-is-c
 12. additional functions
 
 
-### Installation
 
-#### Clone repo, activate via symlink and backup your pre-existing .bashrc
-```
-cd
-git clone https://github.com/meatware/custom_bashrc.git
-mv .bashrc .your_old_bashrc
-ln -s ~/custom_bashrc/_bashrc.sh ~/.bashrc
-```
 

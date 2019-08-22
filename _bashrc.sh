@@ -6,6 +6,9 @@ if [ -f /etc/profile.d/bash_completion.sh ]; then
     source /etc/profile.d/bash_completion.sh
 fi
 
+# Load composure first, so we support function metadata
+. $HOME/custom_bashrc/modules/composure.sh
+
 # Source bashrc assets
 . $HOME/custom_bashrc/theme_settings.sh
 . $HOME/custom_bashrc/bashrc_assets/_bash_colour_functions.sh
@@ -13,6 +16,12 @@ fi
 . $HOME/custom_bashrc/bashrc_assets/_bash_colour_defs.sh
 . $HOME/custom_bashrc/bashrc_assets/_bash_git_functions.sh
 . $HOME/custom_bashrc/bashrc_assets/_bash_aliases.sh
+
+# source bash modules 
+. $HOME/custom_bashrc/modules/aws_module.sh
+. $HOME/custom_bashrc/modules/base_module.sh
+
+
 
 # https://superuser.com/questions/288714/bash-autocomplete-like-zsh
 bind 'set show-all-if-ambiguous on'
@@ -35,14 +44,14 @@ bind 'set colored-completion-prefix on'
 
 ##################################
 ### last command timer
-function timer_start {
-    timer=${timer:-$SECONDS}
-}
+# function timer_start {
+#     timer=${timer:-$SECONDS}
+# }
 
-function timer_stop {
-    timer_show=$(($SECONDS - $timer))
-    unset timer
-}
+# function timer_stop {
+#     timer_show=$(($SECONDS - $timer))
+#     unset timer
+# }
 
 #trap 'timer_start' DEBUG
 
@@ -95,8 +104,11 @@ if [ "$color_prompt" = yes ]; then
 
         VIRTENV=$(virtualenv_info)
 
-        ### Display ssh variable notification in prompt if aplicable
+        ### Display ssh variable notification in prompt if applicable
         SSH_SESSION=$(ssh_info)
+
+        ### Display AWS profile if applicable
+        CURR_AWS_PROFILE=$(aws_info)
 
         # Display tty no in prompt
         local TTY_VAR=`tty 2> /dev/null | awk -F/ '{nlast = NF 0;print $nlast$NF": "}'`
@@ -118,16 +130,14 @@ if [ "$color_prompt" = yes ]; then
 PS1="${debian_chroot:+($debian_chroot)}\n\
 ${BARCOL}┌──\
 ${TXTCOL}[\u]\
-${BARCOL}──\
+${BARCOL}─\
 ${TXTCOL}[\H]\
-${BARCOL}──\
-${TXTCOL}[speed: ${timer_show}s]\
 $(parse_git)\
-${VIRTENV}${SSH_SESSION}
+${VIRTENV}${SSH_SESSION}${CURR_AWS_PROFILE}
 ${BARCOL}│${DKGRAY}${TTY_VAR}${PATH_COL}> \w \
 \n${BARCOL}└──\
 ${TXTCOL}`date +"%H:%M"`\
-${BARCOL}──\
+${BARCOL}─\
 ${ERRPROMPT}${TERGREEN}"
 }
 

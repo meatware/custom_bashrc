@@ -13,7 +13,7 @@ function parse_git() {
     git_str=$(find_git_branch)
     if [[ ! -z "$git_str" ]]; then
         ### now check for git dirty state
-        git_str="${BARCOL}──${TXTCOL}[$(git_com_diff) ${git_str}$(find_git_dirty)"
+        git_str="${BARCOL}──${TXTCOL}[$(git_com_diff)${git_str}$(find_git_dirty)"
 
         ### add git stats if applicable
         git_str="${git_str}$(format_git_stats)"
@@ -145,5 +145,3 @@ function format_git_stats() {
     fi
     echo "${gupdown}${TXTCOL}${gbranchstr}${dirty_state}${joined_gitstats}"
 }
-
-
