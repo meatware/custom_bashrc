@@ -5,6 +5,7 @@ function ips ()
 {
     about 'display all ip addresses for this host'
     group 'base'
+
     if command -v ifconfig &>/dev/null
     then
         ifconfig | awk '/inet /{ gsub(/addr:/, ""); print $2 }'
@@ -22,6 +23,7 @@ function down4me ()
     param '1: website url'
     example '$ down4me http://www.google.com'
     group 'base'
+
     curl -Ls "http://downforeveryoneorjustme.com/$1" | sed '/just you/!d;s/<[^>]*>//g'
 }
 
@@ -29,6 +31,7 @@ function myip ()
 {
     about 'displays your ip address, as seen by the Internet'
     group 'base'
+
     list=("http://myip.dnsomatic.com/" "http://checkip.dyndns.com/" "http://checkip.dyndns.org/")
     for url in ${list[*]}
     do
@@ -47,6 +50,7 @@ function pickfrom ()
     param '1: filename'
     example '$ pickfrom /usr/share/dict/words'
     group 'base'
+
     local file=$1
     [ -z "$file" ] && reference $FUNCNAME && return
     length=$(cat $file | wc -l)
@@ -62,6 +66,7 @@ function passgen ()
     example '$ passgen'
     example '$ passgen 6'
     group 'base'
+
     local i pass length=${1:-4}
     pass=$(echo $(for i in $(eval echo "{1..$length}"); do pickfrom /usr/share/dict/words; done))
     echo "With spaces (easier to memorize): $pass"
@@ -81,6 +86,7 @@ function pmdown ()
     param '1: markdown file'
     example '$ pmdown README.md'
     group 'base'
+
     if command -v markdown &>/dev/null
     then
       markdown $1 | browser
@@ -98,6 +104,7 @@ function mkcd ()
     example '$ mkcd foo foo1 foo2 fooN'
     example '$ mkcd /tmp/img/photos/large /tmp/img/photos/self /tmp/img/photos/Beijing'
     group 'base'
+
     mkdir -p -- "$@" && eval cd -- "\"\$$#\""
 }
 
@@ -105,6 +112,7 @@ function lsgrep ()
 {
     about 'search through directory contents with grep'
     group 'base'
+
     ls | grep "$*"
 }
 
@@ -112,6 +120,7 @@ function quiet ()
 {
     about 'what *does* this do?'
     group 'base'
+
     $* &> /dev/null &
 }
 
@@ -119,6 +128,7 @@ function banish-cookies ()
 {
     about 'redirect .adobe and .macromedia files to /dev/null'
     group 'base'
+
     rm -r ~/.macromedia ~/.adobe
     ln -s /dev/null ~/.adobe
     ln -s /dev/null ~/.macromedia
@@ -129,6 +139,7 @@ function usage ()
     about 'disk usage per directory, in Mac OS X and Linux'
     param '1: directory name'
     group 'base'
+
     if [ $(uname) = "Darwin" ]; then
         if [ -n "$1" ]; then
             du -hd 1 "$1"
@@ -152,6 +163,7 @@ if [ ! -e "${BASH_IT}/plugins/enabled/todo.plugin.bash" ] && [ ! -e "${BASH_IT}/
         about 'one thing todo'
         param 'if not set, display todo item'
         param '1: todo text'
+
         if [[ "$*" == "" ]] ; then
             cat ~/.t
         else
@@ -166,6 +178,7 @@ function command_exists ()
     param '1: command to check'
     example '$ command_exists ls && echo exists'
     group 'base'
+    
     type "$1" &> /dev/null ;
 }
 
@@ -178,7 +191,7 @@ mkiso ()
     example 'mkiso'
     example 'mkiso ISO-Name dest/path src/path'
     group 'base'
-
+    
     if type "mkisofs" > /dev/null; then
         [ -z ${1+x} ] && local isoname=${PWD##*/} || local isoname=$1
         [ -z ${2+x} ] && local destpath=../ || local destpath=$2
@@ -201,6 +214,7 @@ function buf ()
     about 'back up file with timestamp'
     param 'filename'
     group 'base'
+
     local filename=$1
     local filetime=$(date +%Y%m%d_%H%M%S)
     cp -a "${filename}" "${filename}_${filetime}"
@@ -211,5 +225,17 @@ function del() {
     param 'file or folder to be deleted'
     example 'del ./file.txt'
     group 'base'
+
     mkdir -p /tmp/.trash && mv "$@" /tmp/.trash;
 }
+
+function ubupdate() {
+    about 'Ubdate & upgrade ubuntu via apt. Then run apt auto-remove'
+    example 'ubupdate'
+    group 'base'
+
+    sudo apt update 
+    sudo apt upgrade -y
+    sudo apt auto-remove
+}
+
