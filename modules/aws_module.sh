@@ -42,6 +42,7 @@ function __awskeys_help {
 
 function __awskeys_get {
     local ln=$(grep -n "\[ *$1 *\]" "${AWS_SHARED_CREDENTIALS_FILE}" | cut -d ":" -f 1)
+    echo "ln $ln"
     if [[ -n "${ln}" ]]; then
         tail -n +${ln} "${AWS_SHARED_CREDENTIALS_FILE}" | egrep -m 3 "aws_access_key_id|aws_secret_access_key|aws_session_token"
     fi
@@ -72,8 +73,10 @@ function __awskeys_show {
 function __awskeys_export {
     if [[ $(__awskeys_list) == *"$1"* ]]; then
         local p_keys=( $(__awskeys_get $1 | tr -d " ") )
+        #echo "p_keys $p_keys"
         if [[ -n "${p_keys}" ]]; then
             for p_key in ${p_keys[@]}; do
+            #echo "p_key $p_key"
                 local key="${p_key%=*}"
                 export "$(echo ${key} | tr [:lower:] [:upper:])=${p_key#*=}"
             done
