@@ -172,14 +172,14 @@ if [ ! -e "${BASH_IT}/plugins/enabled/todo.plugin.bash" ] && [ ! -e "${BASH_IT}/
     }
 fi
 
-function command_exists ()
+function comex ()
 {
     about 'checks for existence of a command'
     param '1: command to check'
-    example '$ command_exists ls && echo exists'
+    example '$ comex ls'
     group 'base'
     
-    type "$1" &> /dev/null ;
+    type "$1"  #&> /dev/null ;
 }
 
 mkiso ()
