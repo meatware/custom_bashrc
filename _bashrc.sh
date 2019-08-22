@@ -19,6 +19,7 @@ fi
 
 # source bash modules 
 . $HOME/custom_bashrc/modules/aws_module.sh
+. $HOME/custom_bashrc/modules/base_module.sh
 
 
 
