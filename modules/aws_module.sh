@@ -4,6 +4,9 @@
 cite about-plugin
 about-plugin 'AWS helper functions'
 
+# export default AWS region
+export AWS_REGION="eu-west-1"
+
 AWS_CONFIG_FILE="${AWS_CONFIG_FILE:-$HOME/.aws/config}"
 AWS_SHARED_CREDENTIALS_FILE="${AWS_SHARED_CREDENTIALS_FILE:-$HOME/.aws/credentials}"
 
@@ -24,6 +27,8 @@ function awskeys {
         __awskeys_show "$2"
     elif [[ $# -eq 2 ]] && [[ "$1" = "export" ]]; then
         __awskeys_export "$2"
+    elif [[ $# -eq 2 ]] && [[ "$1" = "region" ]]; then
+        __awskeys_region "$2"        
     else
         __awskeys_help
     fi
@@ -38,6 +43,15 @@ function __awskeys_help {
     echo "   show    Show the AWS keys associated to a credentials profile"
     echo "   export  Export an AWS credentials profile keys as environment variables"
     echo "   unset   Unset the AWS keys variables from the environment"
+    echo "   region  Change aws region which defaults to eu-west-1"
+}
+
+function __awskeys_region {
+    local new_region=$1
+    if [[ -n "${new_region}" ]]; then
+    echo "AWS_REGION='${new_region}'"
+        export AWS_REGION="${new_region}"
+    fi
 }
 
 function __awskeys_get {
