@@ -4,8 +4,9 @@
 cite about-plugin
 about-plugin 'AWS helper functions'
 
-# export default AWS region
-export AWS_REGION="eu-west-1"
+# export default AWS region & output
+export AWS_DEFAULT_REGION="eu-west-1"
+export AWS_DEFAULT_OUTPUT="json"
 
 AWS_CONFIG_FILE="${AWS_CONFIG_FILE:-$HOME/.aws/config}"
 AWS_SHARED_CREDENTIALS_FILE="${AWS_SHARED_CREDENTIALS_FILE:-$HOME/.aws/credentials}"
@@ -49,15 +50,23 @@ function __awskeys_help {
 function __awskeys_region {
     local new_region=$1
     if [[ -n "${new_region}" ]]; then
-    echo "AWS_REGION='${new_region}'"
-        export AWS_REGION="${new_region}"
+    echo "AWS_DEFAULT_REGION='${new_region}'"
+        export AWS_DEFAULT_REGION="${new_region}"
     fi
 }
 
 function __awskeys_get {
+    
     local ln=$(grep -n "\[ *$1 *\]" "${AWS_SHARED_CREDENTIALS_FILE}" | cut -d ":" -f 1)
     if [[ -n "${ln}" ]]; then
-        tail -n +${ln} "${AWS_SHARED_CREDENTIALS_FILE}" | egrep -m 2 "aws_access_key_id|aws_secret_access_key|aws_session_token"
+        local profile_line_idxs=$(grep -n "\[*\]" "${AWS_SHARED_CREDENTIALS_FILE}" | tr ":" " " | awk '{print $1}' | tr '\n' ' ')
+        local  last_line=$(wc -l "${AWS_SHARED_CREDENTIALS_FILE}" | awk '{print $1}')
+
+        local  all_idxs="${profile_line_idxs}${last_line}"  
+        local  term_ln=$(echo "$all_idxs" | tr ' ' '\n' | grep -w -A 1 "$ln" | tail -1)
+        
+        local  match_strings="aws_access_key_id|aws_secret_access_key|aws_session_token|aws_default_region|aws_default_output|aws_profile|aws_role_session_name|aws_ca_bundle"
+        sed -n "${ln},${term_ln}p" "${AWS_SHARED_CREDENTIALS_FILE}" | egrep  "${match_strings}"
     fi
 }
 
@@ -88,6 +97,7 @@ function __awskeys_export {
         local p_keys=( $(__awskeys_get $1 | tr -d " ") )
         if [[ -n "${p_keys}" ]]; then
             for p_key in ${p_keys[@]}; do
+            echo "* $p_key"
                 local key="${p_key%=*}"
                 export "$(echo ${key} | tr [:lower:] [:upper:])=${p_key#*=}"
             done
