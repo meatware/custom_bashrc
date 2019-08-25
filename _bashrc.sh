@@ -7,19 +7,31 @@ if [ -f /etc/profile.d/bash_completion.sh ]; then
 fi
 
 # Load composure first, so we support function metadata
-. $HOME/custom_bashrc/modules/composure.sh
+. "${HOME}/custom_bashrc/modules/composure.sh"
 
 # Source bashrc assets
-. $HOME/custom_bashrc/theme_settings.sh
-. $HOME/custom_bashrc/bashrc_assets/_bash_colour_functions.sh
-. $HOME/custom_bashrc/bashrc_assets/_bash_helper_functions.sh
-. $HOME/custom_bashrc/bashrc_assets/_bash_colour_defs.sh
-. $HOME/custom_bashrc/bashrc_assets/_bash_git_functions.sh
-. $HOME/custom_bashrc/bashrc_assets/_bash_aliases.sh
+. "${HOME}/custom_bashrc/theme_settings.sh"
+. "${HOME}/custom_bashrc/bashrc_assets/_bash_colour_functions.sh"
+. "${HOME}/custom_bashrc/bashrc_assets/_bash_helper_functions.sh"
+. "${HOME}/custom_bashrc/bashrc_assets/_bash_colour_defs.sh"
+. "${HOME}/custom_bashrc/bashrc_assets/_bash_git_functions.sh"
+. "${HOME}/custom_bashrc/bashrc_assets/_bash_aliases.sh"
 
 # source bash modules 
-. $HOME/custom_bashrc/modules/aws_module.sh
-. $HOME/custom_bashrc/modules/base_module.sh
+. "${HOME}/custom_bashrc/modules/aws_module.sh"
+. "${HOME}/custom_bashrc/modules/base_module.sh"
+. "${HOME}/custom_bashrc/modules/docker_module.sh"
+. "${HOME}/custom_bashrc/modules/docker-machine_module.sh"
+. "${HOME}/custom_bashrc/modules/docker-compose_module.sh"
+
+# source aliases
+. "${HOME}/custom_bashrc/aliases/docker_aliases.sh"
+. "${HOME}/custom_bashrc/aliases/docker-compose_aliases.sh"
+
+# source completions
+. "${HOME}/custom_bashrc/completions/docker_completion.sh"
+. "${HOME}/custom_bashrc/completions/docker-compose_completion.sh"
+. "${HOME}/custom_bashrc/completions/docker-machine_completion.sh"
 
 
 
@@ -165,7 +177,7 @@ fi
 #################################################################
 #################################################################
 #if [ "$TERM" != "dumb" ]; then
-#    [ -e "$HOME/.dircolors" ] && DIR_COLORS="$HOME/.dircolors"
+#    [ -e "${HOME}/.dircolors" ] && DIR_COLORS="${HOME}/.dircolors"
 #    [ -e "$DIR_COLORS" ] || DIR_COLORS=""
 #    eval "`dircolors -b $DIR_COLORS`"
 #fi
