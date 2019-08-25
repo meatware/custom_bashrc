@@ -1,4 +1,3 @@
-:set invnumber
 cite 'about-alias'
 about-alias 'docker-compose abbreviations'
 

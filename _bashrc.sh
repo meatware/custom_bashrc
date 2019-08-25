@@ -23,10 +23,12 @@ fi
 . "${HOME}/custom_bashrc/modules/docker_module.sh"
 . "${HOME}/custom_bashrc/modules/docker-machine_module.sh"
 . "${HOME}/custom_bashrc/modules/docker-compose_module.sh"
+. "${HOME}/custom_bashrc/modules/git_module.sh"
 
 # source aliases
 . "${HOME}/custom_bashrc/aliases/docker_aliases.sh"
 . "${HOME}/custom_bashrc/aliases/docker-compose_aliases.sh"
+. "${HOME}/custom_bashrc/aliases/git_aliases.sh"
 
 # source completions
 . "${HOME}/custom_bashrc/completions/docker_completion.sh"
