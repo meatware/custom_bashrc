@@ -64,10 +64,10 @@ bind 'set colored-completion-prefix on'
 #bind 'TAB:menu-complete'
 
 # https://codeinthehole.com/tips/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/
-"\e[A": history-search-backward
-"\e[B": history-search-forward
-"\e[C": forward-char
-"\e[D": backward-char
+bind '"\e[A":history-search-backward'
+bind '"\e[B":history-search-forward'
+bind '"\e[C":forward-char'
+bind '"\e[D":backward-char'
 #################################################################
 #################################################################
 #################################################################
