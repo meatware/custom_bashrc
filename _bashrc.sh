@@ -17,14 +17,6 @@ fi
 . "${HOME}/custom_bashrc/bashrc_assets/_bash_git_functions.sh"
 . "${HOME}/custom_bashrc/bashrc_assets/_bash_aliases.sh"
 
-# source bash modules 
-. "${HOME}/custom_bashrc/modules/aws_module.sh"
-. "${HOME}/custom_bashrc/modules/base_module.sh"
-. "${HOME}/custom_bashrc/modules/docker_module.sh"
-. "${HOME}/custom_bashrc/modules/docker-machine_module.sh"
-. "${HOME}/custom_bashrc/modules/docker-compose_module.sh"
-. "${HOME}/custom_bashrc/modules/git_module.sh"
-
 # source aliases
 . "${HOME}/custom_bashrc/aliases/docker_aliases.sh"
 . "${HOME}/custom_bashrc/aliases/docker-compose_aliases.sh"
@@ -52,12 +44,30 @@ fi
 . "${HOME}/custom_bashrc/completions/vagrant_completion.sh"
 . "${HOME}/custom_bashrc/completions/virtualbox_completion.sh"
 
+# source bash modules 
+. "${HOME}/custom_bashrc/modules/aws_module.sh"
+. "${HOME}/custom_bashrc/modules/base_module.sh"
+. "${HOME}/custom_bashrc/modules/docker_module.sh"
+. "${HOME}/custom_bashrc/modules/docker-machine_module.sh"
+. "${HOME}/custom_bashrc/modules/docker-compose_module.sh"
+. "${HOME}/custom_bashrc/modules/git_module.sh"
+. "${HOME}/custom_bashrc/modules/explain_module.sh"
+. "${HOME}/custom_bashrc/modules/extract_module.sh"
+
+. "${HOME}/custom_bashrc/modules/git_module.sh"
+
+. "${HOME}/custom_bashrc/modules/alias-completion_module.sh"
 
 # https://superuser.com/questions/288714/bash-autocomplete-like-zsh
 bind 'set show-all-if-ambiguous on'
 bind 'set colored-completion-prefix on'
 #bind 'TAB:menu-complete'
 
+# https://codeinthehole.com/tips/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+"\e[C": forward-char
+"\e[D": backward-char
 #################################################################
 #################################################################
 #################################################################
@@ -91,8 +101,8 @@ bind 'set colored-completion-prefix on'
 #################################################################
 
 # User specific aliases and functions
-HISTSIZE=5000
-HISTFILESIZE=10000
+HISTSIZE=1000000
+HISTFILESIZE=1000000000
 shopt -s histappend
 
 color_prompt=yes
