@@ -39,6 +39,11 @@ grepoall() {
     find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -iname "*" -exec grep -Isin $1 {} /dev/null \;
 }
 
+del_file_by_ext() {
+    file_ext="$1"
+    find . -name "$file_ext" -exec rm -fv {} \;
+}
+
 # TODO: figure out virtualenv for python2
 # https://stackoverflow.com/questions/41573587/what-is-the-difference-between-venv-pyvenv-pyenv-virtualenv-virtualenvwrappe
 venv_create() {
