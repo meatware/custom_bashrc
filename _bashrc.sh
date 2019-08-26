@@ -53,9 +53,9 @@ fi
 . "${HOME}/custom_bashrc/modules/git_module.sh"
 . "${HOME}/custom_bashrc/modules/explain_module.sh"
 . "${HOME}/custom_bashrc/modules/extract_module.sh"
+. "${HOME}/custom_bashrc/modules/history_module.sh"
 
-. "${HOME}/custom_bashrc/modules/git_module.sh"
-
+# load this module last
 . "${HOME}/custom_bashrc/modules/alias-completion_module.sh"
 
 # https://superuser.com/questions/288714/bash-autocomplete-like-zsh
@@ -63,11 +63,6 @@ bind 'set show-all-if-ambiguous on'
 bind 'set colored-completion-prefix on'
 #bind 'TAB:menu-complete'
 
-# https://codeinthehole.com/tips/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/
-bind '"\e[A":history-search-backward'
-bind '"\e[B":history-search-forward'
-bind '"\e[C":forward-char'
-bind '"\e[D":backward-char'
 #################################################################
 #################################################################
 #################################################################
