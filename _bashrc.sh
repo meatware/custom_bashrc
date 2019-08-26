@@ -54,7 +54,9 @@ fi
 . "${HOME}/custom_bashrc/modules/explain_module.sh"
 . "${HOME}/custom_bashrc/modules/extract_module.sh"
 . "${HOME}/custom_bashrc/modules/history_module.sh"
-
+#. "${HOME}/custom_bashrc/modules/nginx_module.sh"
+. "${HOME}/custom_bashrc/modules/ssh_module.sh"
+. "${HOME}/custom_bashrc/modules/sshagent_module.sh"
 # load this module last
 . "${HOME}/custom_bashrc/modules/alias-completion_module.sh"
 
