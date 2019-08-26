@@ -7,21 +7,58 @@ if [ -f /etc/profile.d/bash_completion.sh ]; then
 fi
 
 # Load composure first, so we support function metadata
-. $HOME/custom_bashrc/modules/composure.sh
+. "${HOME}/custom_bashrc/modules/composure.sh"
 
 # Source bashrc assets
-. $HOME/custom_bashrc/theme_settings.sh
-. $HOME/custom_bashrc/bashrc_assets/_bash_colour_functions.sh
-. $HOME/custom_bashrc/bashrc_assets/_bash_helper_functions.sh
-. $HOME/custom_bashrc/bashrc_assets/_bash_colour_defs.sh
-. $HOME/custom_bashrc/bashrc_assets/_bash_git_functions.sh
-. $HOME/custom_bashrc/bashrc_assets/_bash_aliases.sh
+. "${HOME}/custom_bashrc/theme_settings.sh"
+. "${HOME}/custom_bashrc/bashrc_assets/_bash_colour_functions.sh"
+. "${HOME}/custom_bashrc/bashrc_assets/_bash_helper_functions.sh"
+. "${HOME}/custom_bashrc/bashrc_assets/_bash_colour_defs.sh"
+. "${HOME}/custom_bashrc/bashrc_assets/_bash_git_functions.sh"
+. "${HOME}/custom_bashrc/bashrc_assets/_bash_aliases.sh"
+
+# source aliases
+. "${HOME}/custom_bashrc/aliases/docker_aliases.sh"
+. "${HOME}/custom_bashrc/aliases/docker-compose_aliases.sh"
+. "${HOME}/custom_bashrc/aliases/git_aliases.sh"
+. "${HOME}/custom_bashrc/aliases/apt_aliases.sh"
+. "${HOME}/custom_bashrc/aliases/curl_aliases.sh"
+. "${HOME}/custom_bashrc/aliases/vagrant_aliases.sh"
+
+# source completions
+. "${HOME}/custom_bashrc/completions/docker_completion.sh"
+. "${HOME}/custom_bashrc/completions/docker-compose_completion.sh"
+. "${HOME}/custom_bashrc/completions/docker-machine_completion.sh"
+. "${HOME}/custom_bashrc/completions/awscli_completion.sh"
+#. "${HOME}/custom_bashrc/completions/consul_completion.sh"
+. "${HOME}/custom_bashrc/completions/export_completion.sh"
+#. "${HOME}/custom_bashrc/completions/gcloud_completion.sh"
+. "${HOME}/custom_bashrc/completions/git_completion.sh"
+#. "${HOME}/custom_bashrc/completions/kubectl_completion.sh"
+. "${HOME}/custom_bashrc/completions/makefile_completion.sh"
+. "${HOME}/custom_bashrc/completions/pip_completion.sh"
+. "${HOME}/custom_bashrc/completions/pip3_completion.sh"
+. "${HOME}/custom_bashrc/completions/pipenv_completion.sh"
+. "${HOME}/custom_bashrc/completions/ssh_completion.sh"
+. "${HOME}/custom_bashrc/completions/terraform_completion.sh"
+. "${HOME}/custom_bashrc/completions/vagrant_completion.sh"
+. "${HOME}/custom_bashrc/completions/virtualbox_completion.sh"
 
 # source bash modules 
-. $HOME/custom_bashrc/modules/aws_module.sh
-. $HOME/custom_bashrc/modules/base_module.sh
-
-
+. "${HOME}/custom_bashrc/modules/aws_module.sh"
+. "${HOME}/custom_bashrc/modules/base_module.sh"
+. "${HOME}/custom_bashrc/modules/docker_module.sh"
+. "${HOME}/custom_bashrc/modules/docker-machine_module.sh"
+. "${HOME}/custom_bashrc/modules/docker-compose_module.sh"
+. "${HOME}/custom_bashrc/modules/git_module.sh"
+. "${HOME}/custom_bashrc/modules/explain_module.sh"
+. "${HOME}/custom_bashrc/modules/extract_module.sh"
+. "${HOME}/custom_bashrc/modules/history_module.sh"
+#. "${HOME}/custom_bashrc/modules/nginx_module.sh"
+. "${HOME}/custom_bashrc/modules/ssh_module.sh"
+. "${HOME}/custom_bashrc/modules/sshagent_module.sh"
+# load this module last
+. "${HOME}/custom_bashrc/modules/alias-completion_module.sh"
 
 # https://superuser.com/questions/288714/bash-autocomplete-like-zsh
 bind 'set show-all-if-ambiguous on'
@@ -61,8 +98,8 @@ bind 'set colored-completion-prefix on'
 #################################################################
 
 # User specific aliases and functions
-HISTSIZE=5000
-HISTFILESIZE=10000
+HISTSIZE=1000000
+HISTFILESIZE=1000000000
 shopt -s histappend
 
 color_prompt=yes
@@ -165,7 +202,7 @@ fi
 #################################################################
 #################################################################
 #if [ "$TERM" != "dumb" ]; then
-#    [ -e "$HOME/.dircolors" ] && DIR_COLORS="$HOME/.dircolors"
+#    [ -e "${HOME}/.dircolors" ] && DIR_COLORS="${HOME}/.dircolors"
 #    [ -e "$DIR_COLORS" ] || DIR_COLORS=""
 #    eval "`dircolors -b $DIR_COLORS`"
 #fi

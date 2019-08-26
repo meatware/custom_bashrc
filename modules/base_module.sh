@@ -229,13 +229,4 @@ function del() {
     mkdir -p /tmp/.trash && mv "$@" /tmp/.trash;
 }
 
-function ubupdate() {
-    about 'Ubdate & upgrade ubuntu via apt. Then run apt auto-remove'
-    example 'ubupdate'
-    group 'base'
-
-    sudo apt update 
-    sudo apt upgrade -y
-    sudo apt auto-remove
-}
 
