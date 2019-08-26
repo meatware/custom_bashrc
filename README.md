@@ -5,6 +5,8 @@ I wrote this to learn more about bash. Many thanks to the code from projects lik
 
 There are probably better frameworks with more options. However, I need a prompt that I fully understand and can easily port to multiple machines for DevOps. Thus, this is the best config that works for me. By limiting options and adding to this repo gradually, I get to understand bash and the features incrementally. If you spot any improvements, feel free to submit a pull request!
 
+Repo is designed to work with a blackground. Yopur mileage will vary with anything else!
+
 ## Installation
 
 ### Clone repo, activate via symlink and backup your pre-existing .bashrc
