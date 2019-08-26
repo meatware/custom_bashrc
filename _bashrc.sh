@@ -38,6 +38,18 @@ fi
 . "${HOME}/custom_bashrc/completions/docker-compose_completion.sh"
 . "${HOME}/custom_bashrc/completions/docker-machine_completion.sh"
 
+. "${HOME}/custom_bashrc/completions/awscli_completion.sh"
+. "${HOME}/custom_bashrc/completions/consul_completion.sh"
+. "${HOME}/custom_bashrc/completions/export_completion.sh"
+. "${HOME}/custom_bashrc/completions/gcloud_completion.sh"
+. "${HOME}/custom_bashrc/completions/git_completion.sh"
+
+. "${HOME}/custom_bashrc/completions/docker-machine_completion.sh"
+. "${HOME}/custom_bashrc/completions/docker-machine_completion.sh"
+. "${HOME}/custom_bashrc/completions/docker-machine_completion.sh"
+
+
+
 
 
 # https://superuser.com/questions/288714/bash-autocomplete-like-zsh
