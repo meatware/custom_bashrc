@@ -37,19 +37,20 @@ fi
 . "${HOME}/custom_bashrc/completions/docker_completion.sh"
 . "${HOME}/custom_bashrc/completions/docker-compose_completion.sh"
 . "${HOME}/custom_bashrc/completions/docker-machine_completion.sh"
-
 . "${HOME}/custom_bashrc/completions/awscli_completion.sh"
 . "${HOME}/custom_bashrc/completions/consul_completion.sh"
 . "${HOME}/custom_bashrc/completions/export_completion.sh"
 . "${HOME}/custom_bashrc/completions/gcloud_completion.sh"
 . "${HOME}/custom_bashrc/completions/git_completion.sh"
-
-. "${HOME}/custom_bashrc/completions/docker-machine_completion.sh"
-. "${HOME}/custom_bashrc/completions/docker-machine_completion.sh"
-. "${HOME}/custom_bashrc/completions/docker-machine_completion.sh"
-
-
-
+. "${HOME}/custom_bashrc/completions/kubectl_completion.sh"
+. "${HOME}/custom_bashrc/completions/makefile_completion.sh"
+. "${HOME}/custom_bashrc/completions/pip_completion.sh"
+. "${HOME}/custom_bashrc/completions/pip3_completion.sh"
+. "${HOME}/custom_bashrc/completions/pipenv_completion.sh"
+. "${HOME}/custom_bashrc/completions/ssh_completion.sh"
+. "${HOME}/custom_bashrc/completions/terraform_completion.sh"
+. "${HOME}/custom_bashrc/completions/vagrant_completion.sh"
+. "${HOME}/custom_bashrc/completions/virtualbox_completion.sh"
 
 
 # https://superuser.com/questions/288714/bash-autocomplete-like-zsh
