@@ -29,6 +29,7 @@ fi
 . "${HOME}/custom_bashrc/aliases/docker_aliases.sh"
 . "${HOME}/custom_bashrc/aliases/docker-compose_aliases.sh"
 . "${HOME}/custom_bashrc/aliases/git_aliases.sh"
+. "${HOME}/custom_bashrc/aliases/apt_aliases.sh"
 
 # source completions
 . "${HOME}/custom_bashrc/completions/docker_completion.sh"
