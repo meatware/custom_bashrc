@@ -17,6 +17,16 @@ mv .bashrc .your_old_bashrc
 ln -s ~/custom_bashrc/_bashrc.sh ~/.bashrc
 ```
 
+## colour functions
+This prompt has the ability to switch between ~400 colours. Some are redundant, but therre should be a combination for everyone.
+
+run `colsw N` in your terminal where N is a number between 1-400 to switch colour.
+
+run `col_ssh user@remotehost` to copy bashrc setup to a remote host. SSH into that host and `source ~/.bashrc` to activate the copied bash setup.
+
+See other functions in `bashrc_assets/_bash_colour_functions.sh` for more colour functions.
+
+
 ### Things to do:
 1. ~~tidy up code faster shell check~~
 2. fix last command time
