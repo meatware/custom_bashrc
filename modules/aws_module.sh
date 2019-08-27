@@ -29,7 +29,7 @@ function awskeys {
     elif [[ $# -eq 2 ]] && [[ "$1" = "export" ]]; then
         __awskeys_export "$2"
     elif [[ $# -eq 2 ]] && [[ "$1" = "region" ]]; then
-        __awskeys_region "$2"        
+        __awskeys_region "$2"
     else
         __awskeys_help
     fi
@@ -56,15 +56,15 @@ function __awskeys_region {
 }
 
 function __awskeys_get {
-    
+
     local ln=$(grep -n "\[ *$1 *\]" "${AWS_SHARED_CREDENTIALS_FILE}" | cut -d ":" -f 1)
     if [[ -n "${ln}" ]]; then
         local profile_line_idxs=$(grep -n "\[*\]" "${AWS_SHARED_CREDENTIALS_FILE}" | tr ":" " " | awk '{print $1}' | tr '\n' ' ')
         local  last_line=$(wc -l "${AWS_SHARED_CREDENTIALS_FILE}" | awk '{print $1}')
 
-        local  all_idxs="${profile_line_idxs}${last_line}"  
+        local  all_idxs="${profile_line_idxs}${last_line}"
         local  term_ln=$(echo "$all_idxs" | tr ' ' '\n' | grep -w -A 1 "$ln" | tail -1)
-        
+
         local  match_strings="aws_access_key_id|aws_secret_access_key|aws_session_token|aws_default_region|aws_default_output|aws_profile|aws_role_session_name|aws_ca_bundle"
         sed -n "${ln},${term_ln}p" "${AWS_SHARED_CREDENTIALS_FILE}" | egrep  "${match_strings}"
     fi
@@ -117,7 +117,7 @@ function __awskeys_comp {
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
-    opts="help list show export unset"
+    opts="help list show export unset region"
     case "${prev}" in
         help|list|unset)
             return 0

@@ -1,6 +1,7 @@
 cite 'about-alias'
 about-alias 'common git abbreviations'
 
+# https://stackoverflow.com/questions/37770467/why-do-i-have-to-git-push-set-upstream-origin-branch
 # Aliases
 alias gcl='git clone'
 alias ga='git add'

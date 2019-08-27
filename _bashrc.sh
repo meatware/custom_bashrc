@@ -8,6 +8,8 @@ fi
 
 # Load composure first, so we support function metadata
 . "${HOME}/custom_bashrc/modules/composure.sh"
+# support 'plumbing' metadata
+cite _about _param _example _group _author _version
 
 # Source bashrc assets
 . "${HOME}/custom_bashrc/theme_settings.sh"
@@ -28,7 +30,7 @@ fi
 # source completions
 . "${HOME}/custom_bashrc/completions/docker_completion.sh"
 . "${HOME}/custom_bashrc/completions/docker-compose_completion.sh"
-. "${HOME}/custom_bashrc/completions/docker-machine_completion.sh"
+#. "${HOME}/custom_bashrc/completions/docker-machine_completion.sh"
 . "${HOME}/custom_bashrc/completions/awscli_completion.sh"
 #. "${HOME}/custom_bashrc/completions/consul_completion.sh"
 . "${HOME}/custom_bashrc/completions/export_completion.sh"
@@ -38,17 +40,17 @@ fi
 . "${HOME}/custom_bashrc/completions/makefile_completion.sh"
 . "${HOME}/custom_bashrc/completions/pip_completion.sh"
 . "${HOME}/custom_bashrc/completions/pip3_completion.sh"
-. "${HOME}/custom_bashrc/completions/pipenv_completion.sh"
+#. "${HOME}/custom_bashrc/completions/pipenv_completion.sh"
 . "${HOME}/custom_bashrc/completions/ssh_completion.sh"
 . "${HOME}/custom_bashrc/completions/terraform_completion.sh"
-. "${HOME}/custom_bashrc/completions/vagrant_completion.sh"
-. "${HOME}/custom_bashrc/completions/virtualbox_completion.sh"
+#. "${HOME}/custom_bashrc/completions/vagrant_completion.sh"
+#. "${HOME}/custom_bashrc/completions/virtualbox_completion.sh"
 
-# source bash modules 
+# source bash modules
 . "${HOME}/custom_bashrc/modules/aws_module.sh"
 . "${HOME}/custom_bashrc/modules/base_module.sh"
 . "${HOME}/custom_bashrc/modules/docker_module.sh"
-. "${HOME}/custom_bashrc/modules/docker-machine_module.sh"
+# . "${HOME}/custom_bashrc/modules/docker-machine_module.sh"
 . "${HOME}/custom_bashrc/modules/docker-compose_module.sh"
 . "${HOME}/custom_bashrc/modules/git_module.sh"
 . "${HOME}/custom_bashrc/modules/explain_module.sh"
@@ -99,7 +101,7 @@ bind 'set colored-completion-prefix on'
 
 # User specific aliases and functions
 HISTSIZE=1000000
-HISTFILESIZE=1000000000
+HISTFILESIZE=10000
 shopt -s histappend
 
 color_prompt=yes
@@ -113,7 +115,7 @@ if [ "$color_prompt" = yes ]; then
         ###################################################
         ###################################################
         #timer_stop
-        ###################################################        
+        ###################################################
         ###################################################
         ### Setup if else for different color themes
         PATH_COL_VAR="${SET_PATHCOL_VAR}"
@@ -162,7 +164,7 @@ if [ "$color_prompt" = yes ]; then
         ### set titlebar
         local TITLEBAR=`pwdtail`
         echo -ne '\033]2;'${TTY_VAR}${TITLEBAR}'\007'
-        
+
 ## move out of indented tabs to avoid formatting horror (still in function)
 PS1="${debian_chroot:+($debian_chroot)}\n\
 ${BARCOL}┌──\
