@@ -1,5 +1,13 @@
 # .bashrc
 
+#####################################################
+# profile slow .bashrc code - part 1/2
+# https://www.rosipov.com/blog/profiling-slow-bashrc/s
+#PS4='+ $(date "+%s.%N")\011 '
+#exec 3>&2 2>/tmp/bashstart.$$.log
+#set -x
+#####################################################
+
 # Source global definitions
 # Enable programmable completion features for ubuntu.
 if [ -f /etc/profile.d/bash_completion.sh ]; then
@@ -60,7 +68,7 @@ cite _about _param _example _group _author _version
 . "${HOME}/custom_bashrc/modules/ssh_module.sh"
 . "${HOME}/custom_bashrc/modules/sshagent_module.sh"
 # load this module last
-. "${HOME}/custom_bashrc/modules/alias-completion_module.sh"
+#. "${HOME}/custom_bashrc/modules/alias-completion_module.sh"
 
 # https://superuser.com/questions/288714/bash-autocomplete-like-zsh
 bind 'set show-all-if-ambiguous on'
@@ -217,3 +225,8 @@ export EDITOR
 
 # Entry for directory autojump: https://github.com/wting/autojump
 [[ -s ${HOME}/.autojump/etc/profile.d/autojump.sh ]] && source ${HOME}/.autojump/etc/profile.d/autojump.sh
+
+#####################################################
+# profile slow .bashrc code - part 2/2
+#set +x
+#exec 2>&3 3>&-
