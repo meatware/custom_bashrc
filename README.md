@@ -15,6 +15,7 @@ cd
 git clone https://github.com/meatware/custom_bashrc.git
 mv .bashrc .your_old_bashrc
 ln -s ~/custom_bashrc/_bashrc.sh ~/.bashrc
+source ~/.bashrc
 ```
 
 ## colour functions
@@ -32,9 +33,9 @@ See other functions in `bashrc_assets/_bash_colour_functions.sh` for more colour
 2. fix last command time
 3. ~~say when logged in over ssh
 https://unix.stackexchange.com/questions/9605/how-can-i-detect-if-the-shell-is-controlled-from-ssh~~
-4. aws plugin 
+4. aws plugin
     - current loaded profile
-5. update git aliases 
+5. update git aliases
     - to more common set
 6. alias progress to cp?
 7. ssh-add profiles
