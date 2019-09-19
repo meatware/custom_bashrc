@@ -64,8 +64,7 @@ function __awskeys_get {
 
         local  all_idxs="${profile_line_idxs}${last_line}"
         local  term_ln=$(echo "$all_idxs" | tr ' ' '\n' | grep -w -A 1 "$ln" | tail -1)
-
-        local  match_strings="aws_access_key_id|aws_secret_access_key|aws_session_token|aws_default_region|aws_default_output|aws_profile|aws_role_session_name|aws_ca_bundle"
+        local  match_strings="aws_access_key_id|aws_secret_access_key|aws_session_token|aws_default_region|aws_default_output|aws_profile|aws_role_session_name|aws_ca_bundle|AWS_ACCESS_KEY_ID|AWS_SECRET_ACCESS_KEY|AWS_SESSION_TOKEN|AWS_DEFAULT_REGION|AWS_DEFAULT_OUTPUT|AWS_PROFILE|AWS_ROLE_SESSION_NAME|AWS_CA_BUNDLE"
         sed -n "${ln},${term_ln}p" "${AWS_SHARED_CREDENTIALS_FILE}" | egrep  "${match_strings}"
     fi
 }
