@@ -82,7 +82,6 @@ bind 'set colored-completion-prefix on'
 # http://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/
 # see https://github.com/nojhan/liquidprompt
 # http://www.askapache.com/linux/bash-power-prompt/
-# history guide: https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps
 # see http://brettterpstra.com/2009/11/17/my-new-favorite-bash-prompt/
 # generate hostname color depending on name:
 # https://serverfault.com/questions/221108/different-color-prompts-for-different-machines-when-using-terminal-ssh
@@ -108,12 +107,13 @@ bind 'set colored-completion-prefix on'
 #################################################################
 
 # User specific aliases and functions
+# history guide: https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps
 HISTSIZE=1000000
 HISTFILESIZE=10000
 shopt -s histappend
 
-color_prompt=yes
-if [ "$color_prompt" = yes ]; then
+full_prompt=no
+if [ "$full_prompt" = yes ]; then
 
     function prompt_command() {
         ###################################################
@@ -189,15 +189,88 @@ ${ERRPROMPT}${TERGREEN}"
 }
 
 else
-    prompt_command() {
-        PS1="[\d \t \u@\h:\w ] $ "
-    }
+    function prompt_command() {
+        ###################################################
+        ### identify success/fail status of last command
+        ### DO NOT MOVE THIS VARIABLE: must be first!
+        local last_status=$?
+        ###################################################
+        ###################################################
+        #timer_stop
+        ###################################################
+        ###################################################
+        ### Setup if else for different color themes
+        PATH_COL_VAR="${SET_PATHCOL_VAR}"
+        PATH_COL="${SET_PATHCOL}"
+        THEME_VAR="${SET_THEME_VAR}"
+        BARCOL="${SET_BARCOL}"
+        TXTCOL="${SET_TXTCOL}"
+
+        ###################################################
+        ### Turn the prompt symbol red if the user is root
+        ### root stuff
+        if [[ $(id -u) -eq 0 ]]; then
+            ### root color
+            BARCOL="${MORANGE}"
+            TXTCOL="${RED}"
+            local ENDBIT="#"
+        else
+            local ENDBIT="$"
+        fi # root bit
+
+        ###################################################
+        ### Display virtual environment notification  if applicable
+        ## disable the default virtualenv prompt change
+        export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+        VIRTENV=$(virtualenv_info)
+
+        ### Display ssh variable notification in prompt if applicable
+        SSH_SESSION=$(ssh_info)
+
+        ### Display AWS profile if applicable
+        CURR_AWS_PROFILE=$(aws_info)
+
+        # Display tty no in prompt
+        local TTY_VAR=`tty 2> /dev/null | awk -F/ '{nlast = NF 0;print $nlast$NF": "}'`
+
+        ###################################################
+        ### set color coded error string for prompt depending on success of last command
+        if [[ $last_status == "0" ]]; then
+            ERRPROMPT="\[\033[1;1;32m\]${ENDBIT} "
+        else
+            ERRPROMPT='\[\033[1;1;31m\]X '
+        fi
+
+        ###################################################
+        ### set titlebar
+        local TITLEBAR=`pwdtail`
+        echo -ne '\033]2;'${TTY_VAR}${TITLEBAR}'\007'
+
+## move out of indented tabs to avoid formatting horror (still in function)
+PS1="${debian_chroot:+($debian_chroot)}\n\
+${BARCOL}o──\
+${TXTCOL}[\u]\
+${BARCOL}─\
+${TXTCOL}[\H]\
+$(parse_git)\
+${SSH_SESSION}${TXTCOL}${BARCOL}─${TXTCOL}[`date +"%H:%M"`]\
+${DKGRAY}${PATH_COL} > \W \n\
+${BARCOL}\
+${ERRPROMPT}${TERGREEN}"
+}
 
 fi
 
 # switch to export history to all terminals & EXPORT PROMPT
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
+
+# To do this correctly, we need to do a bit of a hack. We need
+# to append to the history file immediately with history -a,
+# clear the current history in our session with history -c,
+# and then read the history file that we’ve appended to,
+# back into our session history with history -r.
 exp_history="no"
 if [ "$exp_history" = "yes" ]; then
     PROMPT_COMMAND="prompt_command; history -a; history -c; history -r"
