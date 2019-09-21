@@ -4,6 +4,9 @@ alias ll='/bin/ls -lht --color'
 alias ll='/bin/ls -lhta --color'
 alias edbash='gedit ~/.bashrc ~/custom_bashrc/bashrc_assets/*.sh &'
 alias F5='source ~/.bashrc'
+alias grep='grep --color=auto'
+
+https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd14255c
 
 function mkcd() {
     #Make a folder and go into it

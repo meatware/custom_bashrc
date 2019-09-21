@@ -30,13 +30,13 @@ function sshbast(){
 grepo() {
     # finds all files in current directory recursively and searches each for grep pattern
     # (case insensitive)
-    find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -name "*" -exec grep -Isi $1 {}  \;
+    find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -name "*" -exec grep --color=auto -Isi $1 {}  \;
 }
 
 grepoall() {
     # finds all files in current directory recursively and searches each for grep pattern
     # Shows the file name in which the pattern was found (case insensitive + linenumber)
-    find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -iname "*" -exec grep -Isin $1 {} /dev/null \;
+    find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -iname "*" -exec grep --color=auto -Isin $1 {} /dev/null \;
 }
 
 del_file_by_ext() {
