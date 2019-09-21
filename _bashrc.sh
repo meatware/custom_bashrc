@@ -112,7 +112,7 @@ HISTSIZE=1000000
 HISTFILESIZE=10000
 shopt -s histappend
 
-full_prompt=no
+full_prompt=yes
 if [ "$full_prompt" = yes ]; then
 
     function prompt_command() {
@@ -190,33 +190,11 @@ ${ERRPROMPT}${TERGREEN}"
 
 else
     function prompt_command() {
-        ###################################################
-        ### identify success/fail status of last command
-        ### DO NOT MOVE THIS VARIABLE: must be first!
-        local last_status=$?
-        ###################################################
-        ###################################################
-        #timer_stop
-        ###################################################
-        ###################################################
-        ### Setup if else for different color themes
         PATH_COL_VAR="${SET_PATHCOL_VAR}"
         PATH_COL="${SET_PATHCOL}"
         THEME_VAR="${SET_THEME_VAR}"
         BARCOL="${SET_BARCOL}"
         TXTCOL="${SET_TXTCOL}"
-
-        ###################################################
-        ### Turn the prompt symbol red if the user is root
-        ### root stuff
-        if [[ $(id -u) -eq 0 ]]; then
-            ### root color
-            BARCOL="${MORANGE}"
-            TXTCOL="${RED}"
-            local ENDBIT="#"
-        else
-            local ENDBIT="$"
-        fi # root bit
 
         ###################################################
         ### Display virtual environment notification  if applicable
@@ -228,36 +206,17 @@ else
         ### Display ssh variable notification in prompt if applicable
         SSH_SESSION=$(ssh_info)
 
-        ### Display AWS profile if applicable
-        CURR_AWS_PROFILE=$(aws_info)
-
-        # Display tty no in prompt
-        local TTY_VAR=`tty 2> /dev/null | awk -F/ '{nlast = NF 0;print $nlast$NF": "}'`
-
-        ###################################################
-        ### set color coded error string for prompt depending on success of last command
-        if [[ $last_status == "0" ]]; then
-            ERRPROMPT="\[\033[1;1;32m\]${ENDBIT} "
-        else
-            ERRPROMPT='\[\033[1;1;31m\]X '
-        fi
-
-        ###################################################
-        ### set titlebar
-        local TITLEBAR=`pwdtail`
-        echo -ne '\033]2;'${TTY_VAR}${TITLEBAR}'\007'
-
 ## move out of indented tabs to avoid formatting horror (still in function)
 PS1="${debian_chroot:+($debian_chroot)}\n\
-${BARCOL}o──\
-${TXTCOL}[\u]\
+${BARCOL}  o──\
+${DKGRAY}[`date +"%H:%M"`]${BARCOL}──${TXTCOL}[\u]\
 ${BARCOL}─\
 ${TXTCOL}[\H]\
-$(parse_git)\
-${SSH_SESSION}${TXTCOL}${BARCOL}─${TXTCOL}[`date +"%H:%M"`]\
-${DKGRAY}${PATH_COL} > \W \n\
+$(parse_git_minimal)\
+${VIRTENV}${SSH_SESSION}\
+${DKGRAY} \W \n\
 ${BARCOL}\
-${ERRPROMPT}${TERGREEN}"
+\[\033[1;1;32m\]$ ${TERGREEN}"
 }
 
 fi
@@ -266,13 +225,13 @@ fi
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
 
-# To do this correctly, we need to do a bit of a hack. We need
-# to append to the history file immediately with history -a,
-# clear the current history in our session with history -c,
-# and then read the history file that we’ve appended to,
-# back into our session history with history -r.
 exp_history="no"
 if [ "$exp_history" = "yes" ]; then
+    # To do this correctly, we need to do a bit of a hack. We need
+    # to append to the history file immediately with history -a,
+    # clear the current history in our session with history -c,
+    # and then read the history file that we’ve appended to,
+    # back into our session history with history -r.
     PROMPT_COMMAND="prompt_command; history -a; history -c; history -r"
 else
     #trap 'timer_start' DEBUG
