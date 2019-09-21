@@ -70,10 +70,9 @@ cite _about _param _example _group _author _version
 # load this module last
 #. "${HOME}/custom_bashrc/modules/alias-completion_module.sh"
 
-# https://superuser.com/questions/288714/bash-autocomplete-like-zsh
-bind 'set show-all-if-ambiguous on'
-bind 'set colored-completion-prefix on'
-#bind 'TAB:menu-complete'
+
+# Entry for directory autojump: https://github.com/wting/autojump
+[[ -s ${HOME}/.autojump/etc/profile.d/autojump.sh ]] && source ${HOME}/.autojump/etc/profile.d/autojump.sh
 
 #################################################################
 #################################################################
@@ -111,15 +110,19 @@ bind 'set colored-completion-prefix on'
 HISTSIZE=1000000
 HISTFILESIZE=10000
 shopt -s histappend
+# https://superuser.com/questions/288714/bash-autocomplete-like-zsh
+bind 'set show-all-if-ambiguous on'
+bind 'set colored-completion-prefix on'
+#bind 'TAB:menu-complete'
 
-full_prompt=yes
-if [ "$full_prompt" = yes ]; then
+full_prompt="yes"
+if [ "$full_prompt" == "yes" ]; then
 
     function prompt_command() {
         ###################################################
         ### identify success/fail status of last command
         ### DO NOT MOVE THIS VARIABLE: must be first!
-        local last_status=$?
+        local last_status="$?"
         ###################################################
         ###################################################
         #timer_stop
@@ -162,7 +165,7 @@ if [ "$full_prompt" = yes ]; then
 
         ###################################################
         ### set color coded error string for prompt depending on success of last command
-        if [[ $last_status == "0" ]]; then
+        if [[ $last_status == 0 ]]; then
             ERRPROMPT="\[\033[1;1;32m\]${ENDBIT} "
         else
             ERRPROMPT='\[\033[1;1;31m\]X '
@@ -255,8 +258,6 @@ export VISUAL=vim
 EDITOR=vim
 export EDITOR
 
-# Entry for directory autojump: https://github.com/wting/autojump
-[[ -s ${HOME}/.autojump/etc/profile.d/autojump.sh ]] && source ${HOME}/.autojump/etc/profile.d/autojump.sh
 
 #####################################################
 # profile slow .bashrc code - part 2/2
