@@ -226,14 +226,17 @@ else
         ### get parent directory
         FULL_PATH=$(pwd)
         LAST2_DIR=${FULL_PATH#"${FULL_PATH%/*/*}/"}
+        
+        #DRIVE_PATH=$(df . | tail -1 | awk '{print $1}')
+        #DRIVE_ID=${DRIVE_PATH#"${DRIVE_PATH%/*}/"}
 
 ## move out of indented tabs to avoid formatting horror (still in function)
 PS1="${debian_chroot:+($debian_chroot)}\n\
 ${BARCOL}  o──\
-${DKGRAY}(`date +"%H:%M"`)${BARCOL}──${TXTCOL}(\u@\H)\
+${TXTCOL}(`date +"%H:%M"`)${BARCOL}──${TXTCOL}(\u@\H)\
+${BARCOL}──${GRAY}(${GRAY}${LAST2_DIR})\
 $(parse_git_minimal)\
-${VIRTENV}${SSH_SESSION}\
-${DKGRAY} (${LAST2_DIR})\n\
+${VIRTENV}${SSH_SESSION}\n\
 ${BARCOL}\
 \[\033[1;1;32m\]$ ${TERGREEN}"
 }

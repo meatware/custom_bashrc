@@ -37,10 +37,10 @@ function parse_git_minimal() {
     git_str=$(find_git_branch)
     if [[ ! -z "$git_str" ]]; then
         ### now check for git dirty state
-        git_str="${BARCOL}──${TXTCOL}[${git_str}$(find_git_dirty)"
+        git_str="${BARCOL}──${TXTCOL}(${git_str}$(find_git_dirty)"
 
         ### add final closing bracket
-        git_str="${git_str}${TXTCOL}]"
+        git_str="${git_str}${TXTCOL})"
 
         ### add short commitid string
         #git_str="${git_str}$(get_git_commid)"
