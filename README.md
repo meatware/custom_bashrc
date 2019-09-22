@@ -37,7 +37,7 @@ https://unix.stackexchange.com/questions/9605/how-can-i-detect-if-the-shell-is-c
     - ~~current loaded profile~~
 5. ~~update git aliases~~
     - ~~to more common set~~
-6. alias progress to cp?
+6. ??
 7. ssh-add profiles
 8. setup_install
     - bash autocomlete
@@ -46,7 +46,7 @@ https://unix.stackexchange.com/questions/9605/how-can-i-detect-if-the-shell-is-c
 9. enable git_minimal prompt (speed up)
     - function to turn off
     - speed check
-10. enable compact 1 & 2 line prompt versions
+10. ~~enable compact 2 line prompt version~~
 11. auto-completion improvements
     - additional scripts
     - autocomplete aliases
