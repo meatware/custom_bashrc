@@ -126,8 +126,8 @@ bind 'set show-all-if-ambiguous on'
 bind 'set colored-completion-prefix on'
 #bind 'TAB:menu-complete'
 
-full_prompt="no"
-if [ "$full_prompt" == "yes" ]; then
+FULL_PROMPT="$SET_FULL_PROMPT" # set in theme_settings.sh
+if [ "$FULL_PROMPT" == "yes" ]; then
 
     function prompt_command() {
         ###################################################
