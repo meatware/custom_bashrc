@@ -218,7 +218,7 @@ else
         ## disable the default virtualenv prompt change
         export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-        VIRTENV=$(virtualenv_info)
+        VIRTENV=$(virtualenv_min_info)
 
         ### Display ssh variable notification in prompt if applicable
         SSH_SESSION=$(ssh_info)
@@ -232,13 +232,12 @@ else
 
 ## move out of indented tabs to avoid formatting horror (still in function)
 PS1="${debian_chroot:+($debian_chroot)}\n\
-${BARCOL}  o──\
-${TXTCOL}(`date +"%H:%M"`)${BARCOL}──${TXTCOL}(\u@\H)\
-${BARCOL}──${GRAY}(${GRAY}${LAST2_DIR})\
-$(parse_git_minimal)\
-${VIRTENV}${SSH_SESSION}\n\
 ${BARCOL}\
-\[\033[1;1;32m\]$ ${TERGREEN}"
+${TXTCOL}(`date +"%H:%M"`)${BARCOL}─${TXTCOL}(\u@\H)\
+${BARCOL}─${GRAY}(${GRAY}${LAST2_DIR})\
+$(parse_git_minimal)\n\
+${BARCOL}\
+${RED}${VIRTENV} \[\033[1;1;32m\]$ ${TERGREEN}"
 }
 
 fi

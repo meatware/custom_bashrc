@@ -112,15 +112,20 @@ function col_ssh(){
 }
 
 #############################
-function virtualenv_info(){
+function virtualenv_min_info(){
     # Get Virtual Env and display in prompt
     if [[ -n "$VIRTUAL_ENV" ]]; then
         # Strip out the path and just leave the env name
-        venv="${VIRTUAL_ENV##*/}"
+        local venv="${VIRTUAL_ENV##*/}"
     else
         # In case you don't have one activated
-        venv=""
+        local venv=""
     fi
+    [[ -n "$venv" ]] && echo "$venv"
+}
+
+function virtualenv_info(){
+    local venv=$(virtualenv_min_info)
     [[ -n "$venv" ]] && echo "${BARCOL}─${TXTCOL}[${HIRed}$venv${TXTCOL}]"
 }
 
