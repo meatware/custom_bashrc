@@ -19,7 +19,7 @@ source ~/.bashrc
 ```
 
 ## colour functions
-This prompt has the ability to switch between ~400 colours. Some are redundant, but therre should be a combination for everyone.
+This prompt has the ability to switch between ~400 colours. Some are redundant, but there should be a combination for everyone.
 
 run `colsw N` in your terminal where N is a number between 1-400 to switch colour.
 
@@ -33,10 +33,10 @@ See other functions in `bashrc_assets/_bash_colour_functions.sh` for more colour
 2. fix last command time
 3. ~~say when logged in over ssh
 https://unix.stackexchange.com/questions/9605/how-can-i-detect-if-the-shell-is-controlled-from-ssh~~
-4. aws plugin
-    - current loaded profile
-5. update git aliases
-    - to more common set
+4. ~~aws plugin~~
+    - ~~current loaded profile~~
+5. ~~update git aliases~~
+    - ~~to more common set~~
 6. alias progress to cp?
 7. ssh-add profiles
 8. setup_install

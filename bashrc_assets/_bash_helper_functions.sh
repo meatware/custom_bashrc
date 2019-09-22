@@ -1,3 +1,16 @@
+function check_new_bashrc_vers() {
+    # check relation of our local .bashrc to remote basshrc at https://github.com/meatware/custom_bashrc
+    BASHRC_CURR_BRANCH=$(git --git-dir=${HOME}/custom_bashrc/.git rev-parse --abbrev-ref HEAD)
+    BASHRC_COMMIT_DETAILS=$(git --git-dir=${HOME}/custom_bashrc/.git rev-list --left-right \
+                            --count origin/master..."${BASHRC_CURR_BRANCH}")
+    BC_BEHIND=$(echo "$BASHRC_COMMIT_DETAILS" | awk '{print $1}' | sed 's/^[ \t]*//;s/[ \t]*$//')
+    BC_AHEAD=$(echo "$BASHRC_COMMIT_DETAILS" | awk '{print $2}' | sed 's/^[ \t]*//;s/[ \t]*$//')
+
+    echo -e "\n${PureCHATREU}Your bashrc is ${PureBRed}${BC_BEHIND} ${PureCHATREU}commits behind origin/master and ${PureBBlue}${BC_AHEAD} ${PureCHATREU}commits ahead\n${NOCOL}"
+}
+
+
+
 function gedit(){ command gedit "$@" &>/dev/null & }
 
 function nomacs(){ command nomacs "$@" &>/dev/null & }
@@ -30,13 +43,13 @@ function sshbast(){
 grepo() {
     # finds all files in current directory recursively and searches each for grep pattern
     # (case insensitive)
-    find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -name "*" -exec grep -Isi $1 {}  \;
+    find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -name "*" -exec grep --color=auto -Isi $1 {}  \;
 }
 
 grepoall() {
     # finds all files in current directory recursively and searches each for grep pattern
     # Shows the file name in which the pattern was found (case insensitive + linenumber)
-    find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -iname "*" -exec grep -Isin $1 {} /dev/null \;
+    find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -iname "*" -exec grep --color=auto -Isin $1 {} /dev/null \;
 }
 
 del_file_by_ext() {

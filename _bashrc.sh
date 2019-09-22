@@ -14,6 +14,26 @@ if [ -f /etc/profile.d/bash_completion.sh ]; then
     source /etc/profile.d/bash_completion.sh
 fi
 
+# Set default editor
+export VISUAL=vim
+EDITOR=vim
+export EDITOR
+ 
+# Enable bash shell options
+shopt -s cdspell # corrects minor cd spelling errors
+shopt -s cdable_vars # non-dir args supplied to cd are assumned to be vars
+shopt -s no_empty_cmd_completion
+shopt -s cmdhist # save all lines of a multiple-line command in the same history entry
+
+# Color for manpages in less makes manpages a little easier to read
+export LESS_TERMCAP_mb=$'\E[38;5;221m'
+export LESS_TERMCAP_md=$'\E[38;5;221m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;35m'
+
 # Load composure first, so we support function metadata
 . "${HOME}/custom_bashrc/modules/composure.sh"
 # support 'plumbing' metadata
@@ -70,26 +90,13 @@ cite _about _param _example _group _author _version
 # load this module last
 #. "${HOME}/custom_bashrc/modules/alias-completion_module.sh"
 
-# https://superuser.com/questions/288714/bash-autocomplete-like-zsh
-bind 'set show-all-if-ambiguous on'
-bind 'set colored-completion-prefix on'
-#bind 'TAB:menu-complete'
+
+# Entry for directory autojump: https://github.com/wting/autojump
+[[ -s ${HOME}/.autojump/etc/profile.d/autojump.sh ]] && source ${HOME}/.autojump/etc/profile.d/autojump.sh
 
 #################################################################
 #################################################################
 #################################################################
-# guides
-# http://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/
-# see https://github.com/nojhan/liquidprompt
-# http://www.askapache.com/linux/bash-power-prompt/
-# history guide: https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps
-# see http://brettterpstra.com/2009/11/17/my-new-favorite-bash-prompt/
-# generate hostname color depending on name:
-# https://serverfault.com/questions/221108/different-color-prompts-for-different-machines-when-using-terminal-ssh
-# https://www.maketecheasier.com/more-useful-and-interesting-bash-prompts/ # megafancyprompt
-
-
-##################################
 ### last command timer
 # function timer_start {
 #     timer=${timer:-$SECONDS}
@@ -106,20 +113,27 @@ bind 'set colored-completion-prefix on'
 #################################################################
 #################################################################
 #################################################################
+# check relation of our local .bashrc to remote basshrc at https://github.com/meatware/custom_bashrc
+check_new_bashrc_vers
 
 # User specific aliases and functions
+# history guide: https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps
 HISTSIZE=1000000
 HISTFILESIZE=10000
 shopt -s histappend
+# https://superuser.com/questions/288714/bash-autocomplete-like-zsh
+bind 'set show-all-if-ambiguous on'
+bind 'set colored-completion-prefix on'
+#bind 'TAB:menu-complete'
 
-color_prompt=yes
-if [ "$color_prompt" = yes ]; then
+FULL_PROMPT="$SET_FULL_PROMPT" # set in theme_settings.sh
+if [ "$FULL_PROMPT" == "yes" ]; then
 
     function prompt_command() {
         ###################################################
         ### identify success/fail status of last command
         ### DO NOT MOVE THIS VARIABLE: must be first!
-        local last_status=$?
+        local last_status="$?"
         ###################################################
         ###################################################
         #timer_stop
@@ -162,7 +176,7 @@ if [ "$color_prompt" = yes ]; then
 
         ###################################################
         ### set color coded error string for prompt depending on success of last command
-        if [[ $last_status == "0" ]]; then
+        if [[ $last_status == 0 ]]; then
             ERRPROMPT="\[\033[1;1;32m\]${ENDBIT} "
         else
             ERRPROMPT='\[\033[1;1;31m\]X '
@@ -189,17 +203,53 @@ ${ERRPROMPT}${TERGREEN}"
 }
 
 else
-    prompt_command() {
-        PS1="[\d \t \u@\h:\w ] $ "
-    }
+    function prompt_command() {
+        PATH_COL_VAR="${SET_PATHCOL_VAR}"
+        PATH_COL="${SET_PATHCOL}"
+        THEME_VAR="${SET_THEME_VAR}"
+        BARCOL="${SET_BARCOL}"
+        TXTCOL="${SET_TXTCOL}"
+
+        ###################################################
+        ### Display virtual environment notification  if applicable
+        ## disable the default virtualenv prompt change
+        export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+        VIRTENV=$(virtualenv_min_info)
+
+        ### Display ssh variable notification in prompt if applicable
+        SSH_SESSION=$(ssh_info)
+
+        ### get parent directory
+        FULL_PATH=$(pwd)
+        LAST2_DIR=${FULL_PATH#"${FULL_PATH%/*/*}/"}
+        
+        #DRIVE_PATH=$(df . | tail -1 | awk '{print $1}')
+        #DRIVE_ID=${DRIVE_PATH#"${DRIVE_PATH%/*}/"}
+
+## move out of indented tabs to avoid formatting horror (still in function)
+PS1="${debian_chroot:+($debian_chroot)}\n\
+${BARCOL}\
+${TXTCOL}(`date +"%H:%M"`)${BARCOL}─${TXTCOL}(\u@\H)\
+${BARCOL}─${GRAY}(${GRAY}${LAST2_DIR})\
+$(parse_git_minimal)\n\
+${BARCOL}\
+${RED}${VIRTENV} \[\033[1;1;32m\]$ ${TERGREEN}"
+}
 
 fi
 
 # switch to export history to all terminals & EXPORT PROMPT
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
+
 exp_history="no"
 if [ "$exp_history" = "yes" ]; then
+    # To do this correctly, we need to do a bit of a hack. We need
+    # to append to the history file immediately with history -a,
+    # clear the current history in our session with history -c,
+    # and then read the history file that we’ve appended to,
+    # back into our session history with history -r.
     PROMPT_COMMAND="prompt_command; history -a; history -c; history -r"
 else
     #trap 'timer_start' DEBUG
@@ -219,14 +269,22 @@ fi
 #####
 
 
-export VISUAL=vim
-EDITOR=vim
-export EDITOR
 
-# Entry for directory autojump: https://github.com/wting/autojump
-[[ -s ${HOME}/.autojump/etc/profile.d/autojump.sh ]] && source ${HOME}/.autojump/etc/profile.d/autojump.sh
+
 
 #####################################################
 # profile slow .bashrc code - part 2/2
 #set +x
 #exec 2>&3 3>&-
+#####################################################
+
+# guides
+# http://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/
+# see https://github.com/nojhan/liquidprompt
+# http://www.askapache.com/linux/bash-power-prompt/
+# see http://brettterpstra.com/2009/11/17/my-new-favorite-bash-prompt/
+# generate hostname color depending on name:
+# https://serverfault.com/questions/221108/different-color-prompts-for-different-machines-when-using-terminal-ssh
+# https://www.maketecheasier.com/more-useful-and-interesting-bash-prompts/ # megafancyprompt
+# https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd14255c
+https://www.tldp.org/LDP/abs/html/sample-bashrc.html

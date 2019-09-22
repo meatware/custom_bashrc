@@ -31,6 +31,26 @@ function parse_git() {
     fi
 }
 
+function parse_git_minimal() {
+
+    ### first check to see if we are in a git branch
+    git_str=$(find_git_branch)
+    if [[ ! -z "$git_str" ]]; then
+        ### now check for git dirty state
+        git_str="${BARCOL}─${TXTCOL}(${git_str}$(find_git_dirty)"
+
+        ### add final closing bracket
+        git_str="${git_str}${TXTCOL})"
+
+        ### add short commitid string
+        #git_str="${git_str}$(get_git_commid)"
+
+        ### Final echo that PS prompt sees
+        echo $git_str
+    else
+        echo ""
+    fi
+}
 
 #############################
 function find_git_branch() {
