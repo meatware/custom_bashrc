@@ -14,9 +14,19 @@ if [ -f /etc/profile.d/bash_completion.sh ]; then
     source /etc/profile.d/bash_completion.sh
 fi
 
+# Set default editor
 export VISUAL=vim
 EDITOR=vim
 export EDITOR
+
+# Color for manpages in less makes manpages a little easier to read
+export LESS_TERMCAP_mb=$'\E[38;5;221m'
+export LESS_TERMCAP_md=$'\E[38;5;221m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;35m'
 
 # Load composure first, so we support function metadata
 . "${HOME}/custom_bashrc/modules/composure.sh"
