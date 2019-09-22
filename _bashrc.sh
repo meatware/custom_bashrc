@@ -14,6 +14,10 @@ if [ -f /etc/profile.d/bash_completion.sh ]; then
     source /etc/profile.d/bash_completion.sh
 fi
 
+export VISUAL=vim
+EDITOR=vim
+export EDITOR
+
 # Load composure first, so we support function metadata
 . "${HOME}/custom_bashrc/modules/composure.sh"
 # support 'plumbing' metadata
@@ -209,21 +213,23 @@ else
         ### Display ssh variable notification in prompt if applicable
         SSH_SESSION=$(ssh_info)
 
+        ### get parent directory
+        FULL_PATH=$(pwd)
+        LAST2_DIR=${FULL_PATH#"${FULL_PATH%/*/*}/"}
+
 ## move out of indented tabs to avoid formatting horror (still in function)
 PS1="${debian_chroot:+($debian_chroot)}\n\
 ${BARCOL}  o──\
-${DKGRAY}[`date +"%H:%M"`]${BARCOL}──${TXTCOL}[\u]\
-${BARCOL}─\
-${TXTCOL}[\H]\
+${DKGRAY}(`date +"%H:%M"`)${BARCOL}──${TXTCOL}(\u@\H)\
 $(parse_git_minimal)\
 ${VIRTENV}${SSH_SESSION}\
-${DKGRAY} \W \n\
+${DKGRAY} (${LAST2_DIR})\n\
 ${BARCOL}\
 \[\033[1;1;32m\]$ ${TERGREEN}"
 }
 
 fi
-
+https://www.tldp.org/LDP/abs/html/sample-bashrc.html
 # switch to export history to all terminals & EXPORT PROMPT
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
@@ -254,9 +260,7 @@ fi
 #####
 
 
-export VISUAL=vim
-EDITOR=vim
-export EDITOR
+
 
 
 #####################################################
