@@ -18,6 +18,12 @@ fi
 export VISUAL=vim
 EDITOR=vim
 export EDITOR
+ 
+# Enable bash shell options
+shopt -s cdspell # corrects minor cd spelling errors
+shopt -s cdable_vars # non-dir args supplied to cd are assumned to be vars
+shopt -s no_empty_cmd_completion
+shopt -s cmdhist # save all lines of a multiple-line command in the same history entry
 
 # Color for manpages in less makes manpages a little easier to read
 export LESS_TERMCAP_mb=$'\E[38;5;221m'
@@ -91,17 +97,6 @@ cite _about _param _example _group _author _version
 #################################################################
 #################################################################
 #################################################################
-# guides
-# http://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/
-# see https://github.com/nojhan/liquidprompt
-# http://www.askapache.com/linux/bash-power-prompt/
-# see http://brettterpstra.com/2009/11/17/my-new-favorite-bash-prompt/
-# generate hostname color depending on name:
-# https://serverfault.com/questions/221108/different-color-prompts-for-different-machines-when-using-terminal-ssh
-# https://www.maketecheasier.com/more-useful-and-interesting-bash-prompts/ # megafancyprompt
-
-
-##################################
 ### last command timer
 # function timer_start {
 #     timer=${timer:-$SECONDS}
@@ -118,6 +113,8 @@ cite _about _param _example _group _author _version
 #################################################################
 #################################################################
 #################################################################
+# check relation of our local .bashrc to remote basshrc at https://github.com/meatware/custom_bashrc
+check_new_bashrc_vers
 
 # User specific aliases and functions
 # history guide: https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps
@@ -241,7 +238,7 @@ ${RED}${VIRTENV} \[\033[1;1;32m\]$ ${TERGREEN}"
 }
 
 fi
-https://www.tldp.org/LDP/abs/html/sample-bashrc.html
+
 # switch to export history to all terminals & EXPORT PROMPT
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
@@ -279,3 +276,15 @@ fi
 # profile slow .bashrc code - part 2/2
 #set +x
 #exec 2>&3 3>&-
+#####################################################
+
+# guides
+# http://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/
+# see https://github.com/nojhan/liquidprompt
+# http://www.askapache.com/linux/bash-power-prompt/
+# see http://brettterpstra.com/2009/11/17/my-new-favorite-bash-prompt/
+# generate hostname color depending on name:
+# https://serverfault.com/questions/221108/different-color-prompts-for-different-machines-when-using-terminal-ssh
+# https://www.maketecheasier.com/more-useful-and-interesting-bash-prompts/ # megafancyprompt
+# https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd14255c
+https://www.tldp.org/LDP/abs/html/sample-bashrc.html

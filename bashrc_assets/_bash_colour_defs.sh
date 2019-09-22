@@ -3,6 +3,7 @@
 # http://blog.taylormcgann.com/tag/prompt-color/
 
 # more: https://github.com/prgmrcom/ansible-bash-color-prompt/blob/master/templates/colorprompt.sh.j2
+
 MORANGE="\[\033[38;5;202m\]"
 DORANGE="\[\033[38;5;221m\]"
 YELLOW="\[\033[38;5;226m\]"
@@ -106,7 +107,40 @@ BGreen="\[\e[1;32m\]"       # Green
 # On_IPurple="\[\e[0;105m\]"  # Purple
 # On_ICyan="\[\e[0;106m\]"    # Cyan
 # On_IWhite="\[\e[0;107m\]"   # White
-#############
+####################################################
+
+# Undecorated colours
+# Normal Colors
+PureBlack='\e[0;30m'        # Black
+PureRed='\e[0;31m'          # Red
+PureGreen='\e[0;32m'        # Green
+PureYellow='\e[0;33m'       # Yellow
+PureBlue='\e[0;34m'         # Blue
+PurePurple='\e[0;35m'       # Purple
+PureCyan='\e[0;36m'         # Cyan
+PureWhite='\e[0;37m'        # White
+PureCHATREU='\e[1;1;32m'
+
+# Bold
+PureBBlack='\e[1;30m'       # Black
+PureBRed='\e[1;31m'         # Red
+PureBGreen='\e[1;32m'       # Green
+PureBYellow='\e[1;33m'      # Yellow
+PureBBlue='\e[1;34m'        # Blue
+PureBPurple='\e[1;35m'      # Purple
+PureBCyan='\e[1;36m'        # Cyan
+PureBWhite='\e[1;37m'       # White
+
+# # Background
+# PureOn_Black='\e[40m'       # Black
+# PureOn_Red='\e[41m'         # Red
+# PureOn_Green='\e[42m'       # Green
+# PureOn_Yellow='\e[43m'      # Yellow
+# PureOn_Blue='\e[44m'        # Blue
+# PureOn_Purple='\e[45m'      # Purple
+# PureOn_Cyan='\e[46m'        # Cyan
+# PureOn_White='\e[47m'       # White
+####################################################
 
 PATH_COLS_ARR=("${WHITE}" "${GRAY}" "${DKGRAY}" "${BGreen}" "${HIPurple}" "${HIYellow}")
 PATHCOLS_ARR_LEN="${#PATH_COLS_ARR[@]}"

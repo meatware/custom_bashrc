@@ -1,5 +1,9 @@
-# colour dir colours
 alias mkdir='mkdir -p'
+
+function mkcd() {
+    #Make a folder and go into it
+    mkdir -p $1; cd $1
+}
 
 
 # ls commands
@@ -28,6 +32,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
+alias bashrc='cd ${HOME}/custom_bashrc; ll'
 
 # Goes up a specified number of directories  (i.e. up 4)
 up ()
@@ -47,17 +52,9 @@ up ()
 
 # other commands
 alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
 
 alias quick-ssh='ssh -Y -C -c blowfish-cbc,arcfour username@yourhost.com'
 alias edbash='gedit ~/.bashrc ~/custom_bashrc/bashrc_assets/*.sh &'
 alias F5='source ~/.bashrc'
-
-
-https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd14255c
-
-function mkcd() {
-    #Make a folder and go into it
-    mkdir -p $1; cd $1
-}
-
 alias his='history'
