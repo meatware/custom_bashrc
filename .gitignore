@@ -1,3 +1,4 @@
 *.sh~
 *.pyc
 theme_settings_BACKUP.sh
+profile_bashrc_speed/*.log
