@@ -1,8 +1,8 @@
 # .bashrc
 
 #####################################################
-# profile slow .bashrc code - part 1/2
-# https://www.rosipov.com/blog/profiling-slow-bashrc/s
+## profile slow .bashrc code - part 1/2
+## https://www.rosipov.com/blog/profiling-slow-bashrc/s
 #PS4='+ $(date "+%s.%N")\011 '
 #exec 3>&2 2>/tmp/bashstart.$$.log
 #set -x
@@ -273,7 +273,7 @@ fi
 
 
 #####################################################
-# profile slow .bashrc code - part 2/2
+## profile slow .bashrc code - part 2/2
 #set +x
 #exec 2>&3 3>&-
 #####################################################
@@ -287,4 +287,4 @@ fi
 # https://serverfault.com/questions/221108/different-color-prompts-for-different-machines-when-using-terminal-ssh
 # https://www.maketecheasier.com/more-useful-and-interesting-bash-prompts/ # megafancyprompt
 # https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd14255c
-https://www.tldp.org/LDP/abs/html/sample-bashrc.html
+# https://www.tldp.org/LDP/abs/html/sample-bashrc.html
