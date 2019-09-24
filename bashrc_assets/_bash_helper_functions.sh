@@ -43,13 +43,13 @@ function sshbast(){
 grepo() {
     # finds all files in current directory recursively and searches each for grep pattern
     # (case insensitive)
-    find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -name "*" -exec grep --color=auto -Isi $1 {}  \;
+    find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -name "*" -exec grep --color=auto -Isi "$1" {}  \;
 }
 
 grepoall() {
     # finds all files in current directory recursively and searches each for grep pattern
     # Shows the file name in which the pattern was found (case insensitive + linenumber)
-    find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -iname "*" -exec grep --color=auto -Isin $1 {} /dev/null \;
+    find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -iname "*" -exec grep --color=auto -Isin "$1" {} /dev/null \;
 }
 
 del_file_by_ext() {
@@ -68,7 +68,7 @@ venv_create() {
             echo "python version $desired_py_version not found"
         else
             $pyth_ver -m venv venv
-            source venv/bin/activate        
+            source venv/bin/activate
         fi
     else
         echo "supply an arg"
