@@ -43,13 +43,21 @@ function sshbast(){
 grepo() {
     # finds all files in current directory recursively and searches each for grep pattern
     # (case insensitive)
-    find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -name "*" -exec grep --color=auto -Isi "$1" {}  \;
+    find ./ -not -path "*/\.*" -not -path "*venv/*" -not -path "*node_modules/*" -name "*" -exec grep --color=auto -Isi "$1" {}  \;
 }
 
 grepoall() {
     # finds all files in current directory recursively and searches each for grep pattern
     # Shows the file name in which the pattern was found (case insensitive + linenumber)
-    find ./ -not -path "*/\.*" -not -path "./venv/*" -not -path "./node_modules/*" -iname "*" -exec grep --color=auto -Isin "$1" {} /dev/null \;
+    # FILE_SEARCH eaxmple "*.py" with quotes or "*" if not supplied
+    TXT_PATTERN="$1"
+    if [[ $# -eq 2 ]]; then
+        FILE_SEARCH="$2"
+    else
+        FILE_SEARCH="*"
+    fi
+
+    find ./ -not -path "*/\.*" -not -path "*venv/*" -not -path "*node_modules/*" -iname "${FILE_SEARCH}" -exec grep --color=auto -Isin "$TXT_PATTERN" {} /dev/null \;
 }
 
 del_file_by_ext() {
