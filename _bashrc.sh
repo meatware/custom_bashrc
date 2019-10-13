@@ -287,5 +287,5 @@ fi
 # https://serverfault.com/questions/221108/different-color-prompts-for-different-machines-when-using-terminal-ssh
 # https://www.maketecheasier.com/more-useful-and-interesting-bash-prompts/ # megafancyprompt
 # https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd14255c
-https://www.tldp.org/LDP/abs/html/sample-bashrc.html
-https://itsfoss.com/shutter-edit-button-disabled/
+# https://www.tldp.org/LDP/abs/html/sample-bashrc.html
+# https://itsfoss.com/shutter-edit-button-disabled/
