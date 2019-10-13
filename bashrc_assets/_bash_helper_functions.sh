@@ -1,4 +1,5 @@
 function check_new_bashrc_vers() {
+    git --git-dir=${HOME}/custom_bashrc/.git fetch --quiet 
     # check relation of our local .bashrc to remote basshrc at https://github.com/meatware/custom_bashrc
     BASHRC_CURR_BRANCH=$(git --git-dir=${HOME}/custom_bashrc/.git rev-parse --abbrev-ref HEAD)
     BASHRC_COMMIT_DETAILS=$(git --git-dir=${HOME}/custom_bashrc/.git rev-list --left-right \
