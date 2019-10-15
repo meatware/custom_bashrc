@@ -18,7 +18,7 @@ fi
 export VISUAL=vim
 EDITOR=vim
 export EDITOR
- 
+
 # Enable bash shell options
 shopt -s cdspell # corrects minor cd spelling errors
 shopt -s cdable_vars # non-dir args supplied to cd are assumned to be vars
@@ -91,8 +91,6 @@ cite _about _param _example _group _author _version
 #. "${HOME}/custom_bashrc/modules/alias-completion_module.sh"
 
 
-# Entry for directory autojump: https://github.com/wting/autojump
-[[ -s ${HOME}/.autojump/etc/profile.d/autojump.sh ]] && source ${HOME}/.autojump/etc/profile.d/autojump.sh
 
 #################################################################
 #################################################################
@@ -223,7 +221,7 @@ else
         ### get parent directory
         FULL_PATH=$(pwd)
         LAST2_DIR=${FULL_PATH#"${FULL_PATH%/*/*}/"}
-        
+
         #DRIVE_PATH=$(df . | tail -1 | awk '{print $1}')
         #DRIVE_ID=${DRIVE_PATH#"${DRIVE_PATH%/*}/"}
 
@@ -289,3 +287,7 @@ fi
 # https://gist.github.com/zachbrowne/8bc414c9f30192067831fafebd14255c
 # https://www.tldp.org/LDP/abs/html/sample-bashrc.html
 # https://itsfoss.com/shutter-edit-button-disabled/
+
+# Entry for directory autojump: https://github.com/wting/autojump
+# needs to be at end
+[[ -s ${HOME}/.autojump/etc/profile.d/autojump.sh ]] && source ${HOME}/.autojump/etc/profile.d/autojump.sh
