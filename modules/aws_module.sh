@@ -70,7 +70,8 @@ function __awskeys_get {
 }
 
 function __awskeys_list {
-    local credentials_list="$((egrep '^\[ *[a-zA-Z0-9_-]+ *\]$' "${AWS_SHARED_CREDENTIALS_FILE}"; grep "\[profile" "${AWS_CONFIG_FILE}" | sed "s|\[profile |\[|g") | sort | uniq)"
+    #local credentials_list="$((egrep '^\[ *[a-zA-Z0-9_-]+ *\]$' "${AWS_SHARED_CREDENTIALS_FILE}"; grep "\[profile" "${AWS_CONFIG_FILE}" | sed "s|\[profile |\[|g") | sort | uniq)"
+    local credentials_list="$((egrep '^\[ *[a-zA-Z0-9_-]+ *\]$' "${AWS_SHARED_CREDENTIALS_FILE}"; grep "\[" "${AWS_SHARED_CREDENTIALS_FILE}" | sed "s|\[profile |\[|g") | sort | uniq)"
     if [[ -n $"{credentials_list}" ]]; then
         echo -e "Available credentials profiles:\n"
         for profile in ${credentials_list}; do
