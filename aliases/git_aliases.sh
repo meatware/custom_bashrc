@@ -14,7 +14,19 @@ alias gpocb='git push origin $(git rev-parse --abbrev-ref HEAD)'
 # Aliases
 alias gcl='git clone'
 alias ga='git add'
+
+gam() {
+  local modified_files=$(git status | grep modified: | awk '{print $2}' | tr '\n' ' ')
+  git add $modified_files
+}
+
 alias grm='git rm'
+
+grma() {
+  local remove_files=$(git status | grep deleted: | awk '{print $2}' | tr '\n' ' ')
+  git rm $remove_files
+}
+
 alias gap='git add -p'
 alias gall='git add -A'
 alias gf='git fetch --all --prune'

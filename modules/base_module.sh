@@ -178,7 +178,7 @@ function comex ()
     param '1: command to check'
     example '$ comex ls'
     group 'base'
-    
+
     type "$1"  #&> /dev/null ;
 }
 
@@ -191,7 +191,7 @@ mkiso ()
     example 'mkiso'
     example 'mkiso ISO-Name dest/path src/path'
     group 'base'
-    
+
     if type "mkisofs" > /dev/null; then
         [ -z ${1+x} ] && local isoname=${PWD##*/} || local isoname=$1
         [ -z ${2+x} ] && local destpath=../ || local destpath=$2
