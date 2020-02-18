@@ -112,7 +112,7 @@ cite _about _param _example _group _author _version
 #################################################################
 #################################################################
 # check relation of our local .bashrc to remote basshrc at https://github.com/meatware/custom_bashrc
-check_new_bashrc_vers
+#check_new_bashrc_vers
 
 # User specific aliases and functions
 # history guide: https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps
@@ -291,3 +291,15 @@ fi
 # Entry for directory autojump: https://github.com/wting/autojump
 # needs to be at end
 [[ -s ${HOME}/.autojump/etc/profile.d/autojump.sh ]] && source ${HOME}/.autojump/etc/profile.d/autojump.sh
+
+# replace autojump with fasd
+# https://www.tecmint.com/fasd-quick-access-to-linux-files-and-directories/
+#eval "$(fasd --init auto)"
+
+
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
