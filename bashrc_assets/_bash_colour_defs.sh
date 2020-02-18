@@ -3,6 +3,7 @@
 # http://blog.taylormcgann.com/tag/prompt-color/
 
 # more: https://github.com/prgmrcom/ansible-bash-color-prompt/blob/master/templates/colorprompt.sh.j2
+NOCOL="\e[m"  # Color Reset
 
 MORANGE="\[\033[38;5;202m\]"
 DORANGE="\[\033[38;5;221m\]"
