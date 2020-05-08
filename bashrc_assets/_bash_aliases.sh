@@ -67,3 +67,11 @@ alias quick-ssh='ssh -Y -C -c blowfish-cbc,arcfour username@yourhost.com'
 alias edbash='gedit ~/.bashrc ~/custom_bashrc/bashrc_assets/*.sh &'
 alias F5='source ~/.bashrc'
 alias his='history'
+
+
+alias bast="ssh -A girishtampi@bastion.firmstep.com"
+alias bastd="ssh -A girishtampi@bastion.devops.firmstep.com"
+
+## df - stop showing snap fs
+alias df='df -x "squashfs"'
+alias dfraw='df"'

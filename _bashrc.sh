@@ -87,7 +87,7 @@ cite _about _param _example _group _author _version
 #. "${HOME}/custom_bashrc/modules/nginx_module.sh"
 . "${HOME}/custom_bashrc/modules/ssh_module.sh"
 . "${HOME}/custom_bashrc/modules/sshagent_module.sh"
-# load this module last
+# load this module last - horrendous for performance
 #. "${HOME}/custom_bashrc/modules/alias-completion_module.sh"
 
 
@@ -115,10 +115,7 @@ cite _about _param _example _group _author _version
 #check_new_bashrc_vers
 
 # User specific aliases and functions
-# history guide: https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps
-HISTSIZE=1000000
-HISTFILESIZE=10000
-shopt -s histappend
+
 # https://superuser.com/questions/288714/bash-autocomplete-like-zsh
 bind 'set show-all-if-ambiguous on'
 bind 'set colored-completion-prefix on'
@@ -237,10 +234,12 @@ ${RED}${VIRTENV} \[\033[1;1;32m\]$ ${TERGREEN}"
 
 fi
 
-# switch to export history to all terminals & EXPORT PROMPT
+# history guide: https://www.digitalocean.com/community/tutorials/how-to-use-bash-history-commands-and-expansions-on-a-linux-vps
 export HISTSIZE=100000                   # big big history
 export HISTFILESIZE=100000               # big big history
+shopt -s histappend
 
+# switch to export history to all terminals & EXPORT PROMPT
 exp_history="no"
 if [ "$exp_history" = "yes" ]; then
     # To do this correctly, we need to do a bit of a hack. We need
@@ -297,9 +296,13 @@ fi
 #eval "$(fasd --init auto)"
 
 
+export GOPATH=$HOME/work
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
 
